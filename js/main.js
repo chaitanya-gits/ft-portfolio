@@ -107,6 +107,7 @@ class NavController {
         if (!hamburger || !navLinks) {
             return;
         }
+        hamburger.setAttribute('aria-expanded', 'false');
         const toggleMenu = () => {
             const isOpen = navLinks.classList.toggle('open');
             hamburger.setAttribute('aria-expanded', String(isOpen));
