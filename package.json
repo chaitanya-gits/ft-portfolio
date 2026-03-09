@@ -4,7 +4,7 @@
   "description": "Fashion technology portfolio",
   "main": "index.html",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && node scripts/prepare-public.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "npm run typecheck",
     "test": "npm run typecheck"
