@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Work — Fashion × Technology Portfolio</title>
+<link rel="stylesheet" href="../css/style.css"/>
+<style>
+.work-intro {
+  padding: 4rem 2.5rem;
+  max-width: 700px;
+  border-bottom: 1px solid var(--grey-20);
+}
+.work-intro p {
+  font-family: var(--font-serif); font-size: 1.1rem;
+  font-style: italic; line-height: 1.75;
+  color: var(--grey-60);
+}
+.work-list { padding: 0; }
+.work-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 220px 80px;
+  gap: 2rem; align-items: center;
+  padding: 2.5rem 2.5rem;
+  border-bottom: 1px solid var(--grey-20);
+  transition: background 0.3s;
+  text-decoration: none; color: inherit;
+  cursor: none;
+}
+.work-item:hover { background: var(--grey-10); }
+.work-item:hover .wi-arrow { transform: translate(5px,-5px); color: var(--white); }
+.wi-num {
+  font-family: var(--font-display); font-size: 1rem;
+  letter-spacing: 0.25em; color: var(--grey-40);
+}
+.wi-main {}
+.wi-cat {
+  font-size: 0.55rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--grey-40); margin-bottom: 0.4rem;
+}
+.wi-title {
+  font-family: var(--font-serif); font-weight: 600;
+  font-size: 1.25rem; color: var(--white); line-height: 1.15;
+  margin-bottom: 0.4rem;
+}
+.wi-desc {
+  font-size: 0.68rem; line-height: 1.75; color: var(--grey-50);
+}
+.wi-meta { text-align: right; }
+.wi-year {
+  font-size: 0.58rem; letter-spacing: 0.15em;
+  color: var(--grey-40); text-transform: uppercase;
+  display: block; margin-bottom: 0.5rem;
+}
+.wi-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; justify-content: flex-end; }
+.wi-tag {
+  font-size: 0.5rem; letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--grey-20); text-transform: uppercase;
+  color: var(--grey-50);
+}
+.wi-arrow {
+  font-family: var(--font-display); font-size: 1.5rem;
+  color: var(--grey-30); text-align: right;
+  transition: transform 0.3s, color 0.3s;
+}
+.wi-honest-badge {
+  display: inline-block;
+  font-size: 0.5rem; letter-spacing: 0.15em;
+  border: 1px solid var(--grey-20); padding: 0.2rem 0.6rem;
+  color: var(--grey-50); text-transform: uppercase; margin-top: 0.5rem;
+}
+
+/* COMING SOON section */
+.coming-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--grey-20);
+  margin-top: 0;
+}
+.cs-card {
+  background: var(--grey-10); padding: 2.5rem;
+  min-height: 180px; display: flex; flex-direction: column;
+  justify-content: space-between;
+}
+.cs-title {
+  font-family: var(--font-serif); font-weight: 400; font-style: italic;
+  font-size: 1rem; color: var(--grey-50);
+}
+.cs-status {
+  font-size: 0.55rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--grey-30);
+}
+.cs-bar {
+  height: 1px; background: var(--grey-20); margin: 1rem 0;
+}
+.cs-progress {
+  height: 1px; background: var(--grey-50);
+  transform-origin: left;
+}
+
+@media (max-width: 900px) {
+  .work-item { grid-template-columns: 50px 1fr; }
+  .wi-meta, .wi-arrow { display: none; }
+  .coming-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 550px) {
+  .coming-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title reveal-x">SELECTED<br/>WORK</h1>
+  <div class="page-header-meta reveal d2">
+    5 Projects — 2024–2026<br/>
+    Fashion × Technology<br/>
+    Honest beginner work
+  </div>
+</div>
+
+<div class="work-intro reveal">
+  <p>These are my first five attempts at combining software skills with fashion thinking. They are not the work of a fashion designer—they are the work of a software engineer teaching himself to think about fashion. I am showing them because the effort is real, and the direction is clear.</p>
+</div>
+
+<!-- WORK LIST -->
+<div class="work-list">
+
+  <a href="../projects/moodboard/index.html" class="work-item reveal">
+    <div class="wi-num">001</div>
+    <div class="wi-main">
+      <p class="wi-cat">Web Application — Interactive Tool</p>
+      <h3 class="wi-title">Digital Mood Board Generator</h3>
+      <p class="wi-desc">Browser-based tool to build fashion mood boards with drag-and-drop colour swatches, image uploads, and text notes. Vanilla HTML/CSS/JS. My first project that combined web skills with fashion thinking.</p>
+      <span class="wi-honest-badge">★ Beginner — First fashion project</span>
+    </div>
+    <div class="wi-meta">
+      <span class="wi-year">2025</span>
+      <div class="wi-stack">
+        <span class="wi-tag">HTML</span>
+        <span class="wi-tag">CSS</span>
+        <span class="wi-tag">JavaScript</span>
+        <span class="wi-tag">Drag API</span>
+      </div>
+    </div>
+    <div class="wi-arrow">→</div>
+  </a>
+
+  <a href="../projects/colorpalette/index.html" class="work-item reveal d1">
+    <div class="wi-num">002</div>
+    <div class="wi-main">
+      <p class="wi-cat">Utility Tool — Colour Theory</p>
+      <h3 class="wi-title">Outfit Colour Palette Analyser</h3>
+      <p class="wi-desc">Input up to 5 clothing colours and receive a harmony analysis—complementary, triadic, analogous. Built to learn colour theory from a fashion perspective. HSL-based calculations in vanilla JS.</p>
+      <span class="wi-honest-badge">★ Practical tool built while learning</span>
+    </div>
+    <div class="wi-meta">
+      <span class="wi-year">2025</span>
+      <div class="wi-stack">
+        <span class="wi-tag">JavaScript</span>
+        <span class="wi-tag">Colour Theory</span>
+        <span class="wi-tag">CSS</span>
+      </div>
+    </div>
+    <div class="wi-arrow">→</div>
+  </a>
+
+  <a href="../projects/sizeguide/index.html" class="work-item reveal d1">
+    <div class="wi-num">003</div>
+    <div class="wi-main">
+      <p class="wi-cat">Utility Tool — Research-Driven</p>
+      <h3 class="wi-title">India → Italy Size Guide</h3>
+      <p class="wi-desc">Size conversion tool for clothing and shoes between Indian and Italian sizing standards. Built to solve a real frustration when researching Italian fashion brands online. My first project combining design research with code.</p>
+      <span class="wi-honest-badge">★ Solved a real personal problem</span>
+    </div>
+    <div class="wi-meta">
+      <span class="wi-year">2024</span>
+      <div class="wi-stack">
+        <span class="wi-tag">HTML Forms</span>
+        <span class="wi-tag">JavaScript</span>
+        <span class="wi-tag">CSS Grid</span>
+      </div>
+    </div>
+    <div class="wi-arrow">→</div>
+  </a>
+
+  
+    <a href="../projects/lookbook/index.html" class="work-item reveal d2">
+    <div class="wi-num">004</div>
+    <div class="wi-main">
+      <p class="wi-cat">Design Concept — Visual Communication</p>
+      <h3 class="wi-title">VOID — Minimal Lookbook Concept</h3>
+      <p class="wi-desc">A six-look fictional capsule collection concept exploring deconstructivist minimal aesthetics. No physical garments—this is a design thinking exercise. Layouts built in Figma, rendered as an interactive web page. Inspired by Margiela SS1989 documentation.</p>
+      <span class="wi-honest-badge">★ First fashion concept — No sewing involved</span>
+    </div>
+    <div class="wi-meta">
+      <span class="wi-year">2024</span>
+      <div class="wi-stack">
+        <span class="wi-tag">Figma</span>
+        <span class="wi-tag">HTML/CSS</span>
+        <span class="wi-tag">Concept Design</span>
+      </div>
+    </div>
+    <div class="wi-arrow">→</div>
+  </a>
+  <a href="../projects/realtimeplanner/index.html" class="work-item reveal d3">
+    <div class="wi-num">005</div>
+    <div class="wi-main">
+      <p class="wi-cat">TypeScript App — Real-time Tool</p>
+      <h3 class="wi-title">Realtime Capsule Outfit Planner</h3>
+      <p class="wi-desc">A simple wardrobe decision tool with live recommendations based on weather, occasion, and colour mood. Built as a TypeScript-first project while keeping the same visual language as the portfolio.</p>
+      <span class="wi-honest-badge">★ First TypeScript migration + real-time logic</span>
+    </div>
+    <div class="wi-meta">
+      <span class="wi-year">2026</span>
+      <div class="wi-stack">
+        <span class="wi-tag">TypeScript</span>
+        <span class="wi-tag">Realtime UI</span>
+        <span class="wi-tag">DOM State</span>
+      </div>
+    </div>
+    <div class="wi-arrow">→</div>
+  </a>
+
+</div>
+
+<!-- COMING SOON -->
+<div style="padding: 5rem 2.5rem 2rem; border-top: 1px solid var(--grey-20); margin-top:0;">
+  <div class="section-tag reveal">In progress — Next projects</div>
+</div>
+<div class="coming-grid">
+  <div class="cs-card reveal">
+    <div class="cs-title">CLO 3D First Garment Simulation</div>
+    <div>
+      <div class="cs-bar"><div class="cs-progress" style="width:25%"></div></div>
+      <span class="cs-status">25% — Currently learning software</span>
+    </div>
+  </div>
+  <div class="cs-card reveal d1">
+    <div class="cs-title">Fashion Brand Visual Identity System</div>
+    <div>
+      <div class="cs-bar"><div class="cs-progress" style="width:40%"></div></div>
+      <span class="cs-status">40% — Logo + type in progress</span>
+    </div>
+  </div>
+  <div class="cs-card reveal d2">
+    <div class="cs-title">Trend Research Document — SS26</div>
+    <div>
+      <div class="cs-bar"><div class="cs-progress" style="width:60%"></div></div>
+      <span class="cs-status">60% — Research ongoing</span>
+    </div>
+  </div>
+</div>
+
+<footer class="footer" style="margin-top:0;">
+  <span class="footer-logo">FT — Work</span>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
+
+

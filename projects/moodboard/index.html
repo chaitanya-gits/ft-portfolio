@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mood Board Generator — Project 01</title>
+<link rel="stylesheet" href="../../css/style.css"/>
+<style>
+body { background: var(--grey-10); }
+
+.project-hero {
+  background: var(--black);
+  padding: 9rem 2.5rem 4rem;
+  border-bottom: 1px solid var(--grey-20);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+}
+.ph-badge {
+  font-size: 0.58rem; letter-spacing: 0.3em;
+  color: var(--grey-40); text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.ph-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.9; margin-bottom: 1.5rem;
+}
+.ph-desc {
+  font-size: 0.78rem; line-height: 2;
+  color: var(--grey-60); max-width: 480px;
+}
+.ph-honest {
+  margin-top: 1.5rem; padding: 1rem 1.5rem;
+  background: var(--grey-10); border-left: 2px solid var(--grey-30);
+  font-size: 0.68rem; line-height: 1.75; color: var(--grey-50);
+  font-style: italic;
+}
+.ph-meta { display: flex; flex-direction: column; gap: 2rem; justify-content: flex-end; }
+.ph-meta-item {}
+.ph-meta-label {
+  font-size: 0.52rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--grey-40); margin-bottom: 0.3rem;
+}
+.ph-meta-value { font-size: 0.78rem; color: var(--grey-70); line-height: 1.8; }
+
+/* APP WRAPPER */
+.app-wrapper {
+  display: grid; grid-template-columns: 260px 1fr;
+  min-height: calc(100vh - 400px);
+}
+
+/* SIDEBAR */
+.app-sidebar {
+  background: var(--black);
+  border-right: 1px solid var(--grey-20);
+  padding: 2rem 1.5rem;
+  position: sticky; top: 0;
+  height: fit-content;
+}
+.sidebar-label {
+  font-size: 0.52rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--grey-40);
+  padding-bottom: 0.75rem; border-bottom: 1px solid var(--grey-20);
+  margin-bottom: 1.2rem;
+}
+.color-swatches {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 4px;
+  margin-bottom: 1.5rem;
+}
+.swatch {
+  aspect-ratio: 1; border: 1px solid var(--grey-20);
+  cursor: none; transition: transform 0.15s;
+  position: relative;
+}
+.swatch:hover { transform: scale(1.1); z-index: 2; }
+.swatch.dragging { opacity: 0.5; }
+
+.tool-btn {
+  width: 100%; background: var(--grey-15);
+  border: 1px solid var(--grey-20); color: var(--grey-70);
+  font-family: var(--font-body); font-size: 0.65rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.7rem 1rem; cursor: none;
+  text-align: left; display: flex; align-items: center; gap: 0.75rem;
+  transition: background 0.2s, color 0.2s; margin-bottom: 0.5rem;
+}
+.tool-btn:hover { background: var(--grey-20); color: var(--white); }
+.tool-btn svg { width:14px; height:14px; flex-shrink:0; }
+
+#colorPickerInput { display:none; }
+
+.text-input {
+  width: 100%; background: var(--grey-10); border: 1px solid var(--grey-20);
+  color: var(--white); font-family: var(--font-body); font-size: 0.7rem;
+  padding: 0.6rem 0.8rem; resize: none; outline: none; margin-top: 0.5rem;
+  cursor: none;
+}
+.text-input:focus { border-color: var(--grey-50); }
+
+.board-controls {
+  margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--grey-20);
+}
+.clear-btn {
+  width: 100%; background: transparent;
+  border: 1px solid var(--grey-30); color: var(--grey-50);
+  font-family: var(--font-body); font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0.65rem; cursor: none; transition: all 0.2s;
+}
+.clear-btn:hover { border-color: #cc3333; color: #cc3333; }
+
+/* BOARD */
+.board-area {
+  background: var(--grey-15); min-height: 600px;
+  position: relative; overflow: hidden;
+}
+.board-hint {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.board-hint p {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 1.1rem; color: var(--grey-30);
+}
+.board-hint small {
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  color: var(--grey-30); text-transform: uppercase; margin-top: 0.5rem; display:block;
+}
+
+/* BOARD ITEMS */
+.board-item {
+  position: absolute; cursor: none;
+  border: 1px solid transparent;
+  transition: border-color 0.15s;
+  min-width: 40px; min-height: 40px;
+}
+.board-item:hover, .board-item.selected { border-color: rgba(255,255,255,0.3); }
+.board-item .delete-btn {
+  position: absolute; top: -10px; right: -10px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #cc3333; color: white;
+  border: none; font-size: 0.7rem; cursor: none;
+  display: none; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.board-item:hover .delete-btn, .board-item.selected .delete-btn { display:flex; }
+.color-block { width: 80px; height: 80px; }
+.text-block {
+  background: transparent; padding: 0.5rem;
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 1rem; color: var(--white);
+  white-space: nowrap; max-width: 200px;
+}
+.img-block img { display:block; max-width:160px; max-height:160px; object-fit:cover; }
+.label-block {
+  font-family: var(--font-body); font-size: 0.55rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--white); background: rgba(0,0,0,0.8);
+  padding: 0.4rem 0.8rem; white-space: nowrap;
+  border: 1px solid var(--grey-30);
+}
+
+/* BOARD TITLE */
+.board-title-area {
+  padding: 1.5rem 2rem; background: var(--black);
+  border-bottom: 1px solid var(--grey-20);
+  display: flex; align-items: center; gap: 1rem;
+}
+.board-title-input {
+  background: transparent; border: none;
+  font-family: var(--font-display); font-size: 1.2rem;
+  letter-spacing: 0.2em; color: var(--white);
+  outline: none; flex: 1; cursor: none;
+}
+.board-title-input::placeholder { color: var(--grey-40); }
+.board-count {
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  color: var(--grey-40); text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .project-hero { grid-template-columns: 1fr; gap: 2rem; }
+  .app-wrapper { grid-template-columns: 1fr; }
+  .app-sidebar { position: static; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../pages/about.html">About</a></li>
+    <li><a href="../../pages/work.html">Work</a></li>
+    <li><a href="../../pages/contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <div>
+    <p class="ph-badge reveal">Project 001 — Web Application — 2025</p>
+    <h1 class="ph-title reveal d1">Digital<br/>Mood Board<br/>Generator</h1>
+    <p class="ph-desc reveal d2">A browser-based mood board tool for fashion ideation. Drag colour swatches onto the canvas, upload reference images, add text notes. Built with vanilla JavaScript—no frameworks or libraries.</p>
+    <div class="ph-honest reveal d3">
+      <strong>Honest note:</strong> This is my first project combining web development with fashion thinking. It is simple, but it is fully functional. I built it because physical mood boards were how I first understood how designers like Margiela and Kawakubo conceptualised their collections.
+    </div>
+  </div>
+  <div class="ph-meta reveal d2">
+    <div class="ph-meta-item">
+      <div class="ph-meta-label">Year</div>
+      <div class="ph-meta-value">2025</div>
+    </div>
+    <div class="ph-meta-item">
+      <div class="ph-meta-label">Stack</div>
+      <div class="ph-meta-value">HTML · CSS · Vanilla JavaScript<br/>Drag & Drop API · FileReader API</div>
+    </div>
+    <div class="ph-meta-item">
+      <div class="ph-meta-label">What I learned</div>
+      <div class="ph-meta-value">DOM manipulation, event handling,<br/>colour theory, design concept workflow</div>
+    </div>
+    <a href="../../pages/work.html" class="btn dark">← Back to Work</a>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="app-sidebar">
+    <div class="sidebar-label">Colour Swatches</div>
+    <div class="color-swatches" id="colorSwatches"></div>
+
+    <div class="sidebar-label" style="margin-top:1.5rem;">Tools</div>
+    <button class="tool-btn" onclick="document.getElementById('colorPickerInput').click()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+      </svg>
+      Add Custom Colour
+    </button>
+    <input type="color" id="colorPickerInput" onchange="addCustomColor(this.value)"/>
+
+    <button class="tool-btn" onclick="document.getElementById('imgUpload').click()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/>
+      </svg>
+      Upload Image
+    </button>
+    <input type="file" id="imgUpload" accept="image/*" style="display:none" onchange="addImage(this)"/>
+
+    <textarea class="text-input" id="textInput" rows="2" placeholder="Add text note..."></textarea>
+    <button class="tool-btn" style="margin-top:0.4rem;" onclick="addTextNote()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+      Add Text Note
+    </button>
+
+    <button class="tool-btn" onclick="addLabel()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+        <line x1="7" y1="7" x2="7.01" y2="7"/>
+      </svg>
+      Add Label Tag
+    </button>
+
+    <div class="board-controls">
+      <button class="clear-btn" onclick="clearBoard()">Clear Board</button>
+    </div>
+  </aside>
+
+  <!-- CANVAS -->
+  <div>
+    <div class="board-title-area">
+      <input class="board-title-input" id="boardTitle" placeholder="UNTITLED MOOD BOARD — CLICK TO NAME" maxlength="40"/>
+      <span class="board-count" id="itemCount">0 items</span>
+    </div>
+    <div class="board-area" id="board">
+      <div class="board-hint" id="boardHint">
+        <p>Drag swatches here</p>
+        <small>or use the tools on the left</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Project 001 — Mood Board</span>
+  <div class="footer-links">
+    <a href="../../pages/work.html">All Projects</a>
+    <a href="../colorpalette/index.html">Next Project →</a>
+  </div>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script src="../../js/main.js"></script>
+<script>
+// ── COLOUR PALETTE ────────────────────────────────────
+const palette = [
+  '#ffffff','#f0ede8','#d4cfc8','#b0aba3',
+  '#888480','#555250','#2e2c2b','#000000',
+  '#e8e0d0','#c8bca8','#a89880','#887058',
+  '#d8d0c8','#c0b8b0','#a8a0a0','#807878',
+  '#e0dcd8','#ccc8c4','#b4b0ac','#9c9894',
+];
+
+const swatchContainer = document.getElementById('colorSwatches');
+palette.forEach(color => {
+  const s = document.createElement('div');
+  s.className = 'swatch';
+  s.style.background = color;
+  s.title = color;
+  s.draggable = true;
+  s.dataset.color = color;
+  s.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('type','color');
+    e.dataTransfer.setData('color', color);
+    s.classList.add('dragging');
+  });
+  s.addEventListener('dragend', () => s.classList.remove('dragging'));
+  s.addEventListener('click', () => dropColorAt(color, randomPos()));
+  swatchContainer.appendChild(s);
+});
+
+function addCustomColor(hex) {
+  dropColorAt(hex, randomPos());
+}
+
+// ── BOARD LOGIC ───────────────────────────────────────
+const board = document.getElementById('board');
+let itemCount = 0;
+let activeItem = null;
+let offsetX = 0, offsetY = 0;
+
+board.addEventListener('dragover', e => e.preventDefault());
+board.addEventListener('drop', e => {
+  e.preventDefault();
+  const type = e.dataTransfer.getData('type');
+  const bRect = board.getBoundingClientRect();
+  const x = e.clientX - bRect.left;
+  const y = e.clientY - bRect.top;
+  if (type === 'color') {
+    dropColorAt(e.dataTransfer.getData('color'), {x,y});
+  }
+});
+
+function dropColorAt(color, pos) {
+  const item = createItem('color-block');
+  item.style.background = color;
+  item.style.left = pos.x - 40 + 'px';
+  item.style.top  = pos.y - 40 + 'px';
+  item.title = color;
+  addToBoard(item);
+}
+
+function addTextNote() {
+  const val = document.getElementById('textInput').value.trim();
+  if (!val) return;
+  const item = createItem('text-block');
+  item.textContent = val;
+  const pos = randomPos();
+  item.style.left = pos.x + 'px';
+  item.style.top  = pos.y + 'px';
+  addToBoard(item);
+  document.getElementById('textInput').value = '';
+}
+
+function addLabel() {
+  const labels = ['SILHOUETTE','TEXTURE','FORM','VOID','DRAPE','STRUCTURE','MINIMAL','RAW','ARCHIVE','CONCEPT'];
+  const item = createItem('label-block');
+  item.textContent = labels[Math.floor(Math.random()*labels.length)];
+  const pos = randomPos();
+  item.style.left = pos.x + 'px';
+  item.style.top  = pos.y + 'px';
+  addToBoard(item);
+}
+
+function addImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const item = createItem('img-block');
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    item.appendChild(img);
+    const pos = randomPos();
+    item.style.left = pos.x + 'px';
+    item.style.top  = pos.y + 'px';
+    addToBoard(item);
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+function createItem(cls) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'board-item';
+  const inner = document.createElement('div');
+  inner.className = cls;
+  wrapper.appendChild(inner);
+  const del = document.createElement('button');
+  del.className = 'delete-btn';
+  del.textContent = '×';
+  del.onclick = e => { e.stopPropagation(); wrapper.remove(); updateCount(-1); };
+  wrapper.appendChild(del);
+  makeDraggable(wrapper);
+  return inner; // return inner but wrapper is structured
+}
+
+// Rebuild createItem properly
+function createBoardItem(cls, content) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'board-item';
+  const inner = document.createElement('div');
+  inner.className = cls;
+  if (content) inner.innerHTML = content;
+  wrapper.appendChild(inner);
+  const del = document.createElement('button');
+  del.className = 'delete-btn';
+  del.textContent = '×';
+  del.onclick = e => { e.stopPropagation(); wrapper.remove(); updateCount(-1); };
+  wrapper.appendChild(del);
+  makeDraggable(wrapper);
+  return {wrapper, inner};
+}
+
+function dropColorAt2(color, pos) {
+  const {wrapper, inner} = createBoardItem('color-block');
+  inner.style.background = color;
+  inner.title = color;
+  wrapper.style.left = Math.max(0, pos.x - 40) + 'px';
+  wrapper.style.top  = Math.max(0, pos.y - 40) + 'px';
+  addToBoard2(wrapper);
+}
+
+function addToBoard2(wrapper) {
+  board.appendChild(wrapper);
+  updateCount(1);
+  document.getElementById('boardHint').style.opacity = '0';
+}
+
+// Replace previous functions
+window.dropColorAt = dropColorAt2;
+
+function addTextNote() {
+  const val = document.getElementById('textInput').value.trim();
+  if (!val) return;
+  const {wrapper, inner} = createBoardItem('text-block');
+  inner.textContent = '"' + val + '"';
+  const pos = randomPos();
+  wrapper.style.left = pos.x + 'px'; wrapper.style.top = pos.y + 'px';
+  addToBoard2(wrapper);
+  document.getElementById('textInput').value = '';
+}
+window.addTextNote = addTextNote;
+
+function addLabel() {
+  const labels = ['SILHOUETTE','TEXTURE','FORM','VOID','DRAPE','STRUCTURE','MINIMAL','RAW','ARCHIVE','CONCEPT','WEIGHT','BREATH'];
+  const {wrapper, inner} = createBoardItem('label-block');
+  inner.textContent = labels[Math.floor(Math.random()*labels.length)];
+  const pos = randomPos();
+  wrapper.style.left = pos.x + 'px'; wrapper.style.top = pos.y + 'px';
+  addToBoard2(wrapper);
+}
+window.addLabel = addLabel;
+
+function addImage(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const {wrapper, inner} = createBoardItem('img-block');
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    inner.appendChild(img);
+    const pos = randomPos();
+    wrapper.style.left = pos.x + 'px'; wrapper.style.top = pos.y + 'px';
+    addToBoard2(wrapper);
+  };
+  reader.readAsDataURL(file); input.value = '';
+}
+window.addImage = addImage;
+
+function addToBoard(el) {} // legacy stub
+
+function makeDraggable(el) {
+  let dx, dy, dragging = false;
+  el.addEventListener('mousedown', e => {
+    if (e.target.classList.contains('delete-btn')) return;
+    dragging = true;
+    const rect = el.getBoundingClientRect();
+    const bRect = board.getBoundingClientRect();
+    dx = e.clientX - rect.left;
+    dy = e.clientY - rect.top;
+    el.classList.add('selected');
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const bRect = board.getBoundingClientRect();
+    let x = e.clientX - bRect.left - dx;
+    let y = e.clientY - bRect.top  - dy;
+    x = Math.max(0, Math.min(bRect.width  - 40, x));
+    y = Math.max(0, Math.min(bRect.height - 40, y));
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+  });
+  document.addEventListener('mouseup', () => {
+    if (dragging) { dragging = false; el.classList.remove('selected'); }
+  });
+}
+
+function updateCount(delta) {
+  itemCount += delta;
+  document.getElementById('itemCount').textContent = itemCount + ' item' + (itemCount !== 1 ? 's' : '');
+}
+
+function clearBoard() {
+  board.querySelectorAll('.board-item').forEach(el => el.remove());
+  itemCount = 0; updateCount(0);
+  document.getElementById('boardHint').style.opacity = '1';
+}
+window.clearBoard = clearBoard;
+
+function randomPos() {
+  const w = board.clientWidth  || 800;
+  const h = board.clientHeight || 500;
+  return { x: 60 + Math.random()*(w-180), y: 60 + Math.random()*(h-180) };
+}
+
+// Seed a few items on load
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    dropColorAt2('#000000', {x:80,y:80});
+    dropColorAt2('#e8e0d0', {x:180,y:120});
+    dropColorAt2('#888480', {x:280,y:70});
+    const {wrapper:w1, inner:i1} = createBoardItem('label-block');
+    i1.textContent = 'VOID'; w1.style.left='380px'; w1.style.top='100px'; addToBoard2(w1);
+    const {wrapper:w2, inner:i2} = createBoardItem('text-block');
+    i2.textContent = '"the label removed"'; w2.style.left='140px'; w2.style.top='220px'; addToBoard2(w2);
+  }, 400);
+});
+</script>
+</body>
+</html>

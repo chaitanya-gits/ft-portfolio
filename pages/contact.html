@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact — Fashion × Technology Portfolio</title>
+<link rel="stylesheet" href="../css/style.css"/>
+<style>
+.contact-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 120px);
+}
+.contact-left {
+  padding: 5rem 3rem;
+  border-right: 1px solid var(--grey-20);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.contact-big {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 0.88; letter-spacing: 0.01em;
+}
+.contact-big .ghost {
+  -webkit-text-stroke: 1px var(--grey-30); color: transparent;
+}
+.contact-intro {
+  font-family: var(--font-serif); font-size: 1.05rem;
+  font-weight: 300; font-style: italic;
+  color: var(--grey-60); line-height: 1.7;
+  max-width: 440px; margin-top: 2.5rem;
+}
+.contact-details { display: flex; flex-direction: column; gap: 0; }
+.cd-item {
+  padding: 1.5rem 0; border-bottom: 1px solid var(--grey-20);
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.cd-label {
+  font-size: 0.52rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--grey-40);
+}
+.cd-value {
+  font-family: var(--font-serif); font-size: 1.05rem;
+  color: var(--white); text-decoration: none;
+  transition: color 0.2s;
+}
+.cd-value:hover { color: var(--grey-60); }
+
+.contact-right {
+  padding: 5rem 3rem;
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.contact-right .section-tag { margin-bottom: 0.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-label {
+  font-size: 0.55rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--grey-40);
+}
+.form-input,
+.form-textarea {
+  background: var(--grey-10);
+  border: 1px solid var(--grey-20);
+  color: var(--white);
+  font-family: var(--font-body); font-size: 0.78rem;
+  padding: 0.85rem 1rem;
+  width: 100%;
+  transition: border-color 0.25s;
+  outline: none;
+  resize: none;
+  cursor: none;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--grey-50); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--grey-40); }
+.form-textarea { min-height: 120px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 0.5rem;
+}
+.form-note {
+  font-size: 0.58rem; letter-spacing: 0.1em;
+  color: var(--grey-40);
+}
+.submit-btn {
+  background: var(--white); color: var(--black);
+  border: none; font-family: var(--font-body);
+  font-size: 0.62rem; letter-spacing: 0.25em;
+  text-transform: uppercase; padding: 0.9rem 2rem;
+  cursor: none; transition: background 0.25s;
+}
+.submit-btn:hover { background: var(--grey-90); }
+.form-confirm {
+  display: none; padding: 1.5rem;
+  background: var(--grey-10); border: 1px solid var(--grey-20);
+  font-size: 0.72rem; line-height: 1.8; color: var(--grey-60);
+  text-align: center;
+}
+.form-confirm.show { display: block; }
+
+/* INSTITUTIONS */
+.institutions {
+  background: var(--grey-10);
+  padding: 4rem 2.5rem;
+  border-top: 1px solid var(--grey-20);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px;
+}
+.inst-card {
+  padding: 2.5rem;
+  border-right: 1px solid var(--grey-20);
+}
+.inst-card:last-child { border-right: none; }
+.inst-name {
+  font-family: var(--font-serif); font-weight: 600;
+  font-size: 1.2rem; color: var(--white); margin-bottom: 0.4rem;
+}
+.inst-program {
+  font-size: 0.6rem; letter-spacing: 0.18em;
+  color: var(--grey-50); text-transform: uppercase; margin-bottom: 1rem;
+}
+.inst-note {
+  font-size: 0.7rem; line-height: 1.8; color: var(--grey-60);
+}
+
+@media (max-width: 900px) {
+  .contact-split { grid-template-columns: 1fr; }
+  .contact-left { border-right: none; border-bottom: 1px solid var(--grey-20); }
+  .form-row { grid-template-columns: 1fr; }
+  .institutions { grid-template-columns: 1fr; }
+  .inst-card { border-right: none; border-bottom: 1px solid var(--grey-20); }
+  .form-submit { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title reveal-x">CONTACT</h1>
+  <div class="page-header-meta reveal d2">
+    Open to conversations<br/>
+    Admissions & collaboration
+  </div>
+</div>
+
+<div class="contact-split">
+
+  <div class="contact-left">
+    <div>
+      <h2 class="contact-big reveal">
+        LET'S<br/>
+        <span class="ghost">TALK</span>
+      </h2>
+      <p class="contact-intro reveal d1">
+        I am actively preparing my applications for fashion schools in Italy. I welcome conversations with admissions teams, current students, or anyone working at the intersection of technology and fashion.
+      </p>
+    </div>
+    <div class="contact-details reveal d2">
+      <div class="cd-item">
+        <span class="cd-label">Email</span>
+        <a href="mailto:yourname@email.com" class="cd-value">yourname@email.com</a>
+      </div>
+      <div class="cd-item">
+        <span class="cd-label">Location</span>
+        <span class="cd-value">Hyderabad, India</span>
+      </div>
+      <div class="cd-item">
+        <span class="cd-label">LinkedIn</span>
+        <a href="https://linkedin.com" class="cd-value" target="_blank">linkedin.com/in/yourname</a>
+      </div>
+      <div class="cd-item">
+        <span class="cd-label">GitHub</span>
+        <a href="https://github.com" class="cd-value" target="_blank">github.com/yourname</a>
+      </div>
+      <div class="cd-item">
+        <span class="cd-label">Availability</span>
+        <span class="cd-value">Immediate for review calls</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <div class="section-tag reveal">Send a message</div>
+    <div id="contactForm">
+      <div class="form-row">
+        <div class="form-group reveal d1">
+          <label class="form-label" for="name">Full Name</label>
+          <input class="form-input" id="name" type="text" placeholder="Your name"/>
+        </div>
+        <div class="form-group reveal d2">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" id="email" type="email" placeholder="your@email.com"/>
+        </div>
+      </div>
+      <div class="form-group reveal d2" style="margin-top:1rem;">
+        <label class="form-label" for="subject">Subject</label>
+        <input class="form-input" id="subject" type="text" placeholder="Portfolio review / Admissions enquiry / Collaboration"/>
+      </div>
+      <div class="form-group reveal d3" style="margin-top:1rem;">
+        <label class="form-label" for="msg">Message</label>
+        <textarea class="form-textarea" id="msg" placeholder="Your message..."></textarea>
+      </div>
+      <div class="form-submit reveal d4">
+        <span class="form-note">Response within 24–48 hours</span>
+        <button class="submit-btn" type="button">Send Message →</button>
+      </div>
+    </div>
+    <div class="form-confirm" id="formConfirm">
+      <p>Message noted. This form is a portfolio demo—please use the email address directly to reach out. Thank you.</p>
+    </div>
+    <div style="margin-top:2rem; padding-top:2rem; border-top:1px solid var(--grey-20);" class="reveal">
+      <p style="font-size:0.65rem; line-height:2; color:var(--grey-50);">
+        <strong style="color:var(--white); font-weight:500;">Portfolio PDF available on request.</strong><br/>
+        Includes extended project documentation, mood boards, and personal statement draft.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- INSTITUTIONS -->
+<div class="institutions">
+  <div class="inst-card reveal">
+    <h3 class="inst-name">Istituto Marangoni</h3>
+    <p class="inst-program">Fashion Technology — Milano</p>
+    <p class="inst-note">Primary application target. The Fashion Technology programme's emphasis on digital tools, innovation, and industry practice aligns directly with my background in software and my emerging interest in fashion systems.</p>
+  </div>
+  <div class="inst-card reveal d1">
+    <h3 class="inst-name">IED Milano</h3>
+    <p class="inst-program">Digital Fashion Design — Milano</p>
+    <p class="inst-note">Secondary target. IED's project-based methodology and focus on digital fashion tools offers a strong environment for someone coming from a technology background who is building design skills from scratch.</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">FT — Contact</span>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+  </div>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
+

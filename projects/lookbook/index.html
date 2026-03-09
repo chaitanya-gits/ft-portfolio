@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VOID — Lookbook Concept — Project 04</title>
+<link rel="stylesheet" href="../../css/style.css"/>
+<style>
+body { background: var(--black); }
+
+/* PROJECT INFO */
+.project-hero { background:var(--black); padding:9rem 2.5rem 4rem; border-bottom:1px solid var(--grey-20); display:grid; grid-template-columns:1fr 1fr; gap:4rem; }
+.ph-badge { font-size:0.58rem; letter-spacing:0.3em; color:var(--grey-40); text-transform:uppercase; margin-bottom:1.5rem; }
+.ph-title { font-family:var(--font-display); font-size:clamp(2.5rem,6vw,5rem); line-height:0.9; margin-bottom:1.5rem; }
+.ph-desc { font-size:0.78rem; line-height:2; color:var(--grey-60); }
+.ph-honest { margin-top:1.5rem; padding:1rem 1.5rem; background:var(--grey-10); border-left:2px solid var(--grey-30); font-size:0.68rem; line-height:1.75; color:var(--grey-50); font-style:italic; }
+.ph-meta { display:flex; flex-direction:column; gap:2rem; justify-content:flex-end; }
+.ph-meta-label { font-size:0.52rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--grey-40); margin-bottom:0.3rem; }
+.ph-meta-value { font-size:0.78rem; color:var(--grey-70); line-height:1.8; }
+
+/* COLLECTION HEADER */
+.collection-header {
+  padding: 7rem 2.5rem 5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--grey-20);
+  position: relative;
+}
+.collection-season {
+  font-size: 0.6rem; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--grey-40); margin-bottom: 1.5rem;
+}
+.collection-name {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 15vw, 13rem);
+  line-height: 0.85; letter-spacing: 0.04em;
+  -webkit-text-stroke: 1px var(--grey-30); color: transparent;
+}
+.collection-subname {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.5rem); color: var(--grey-60);
+  margin-top: 1.5rem; letter-spacing: 0.05em;
+}
+.collection-note {
+  margin-top: 3rem; font-size: 0.65rem; letter-spacing: 0.22em;
+  color: var(--grey-40); text-transform: uppercase;
+  border-top: 1px solid var(--grey-20); padding-top: 2rem;
+  max-width: 500px; margin-left: auto; margin-right: auto;
+  line-height: 2;
+}
+
+/* CONCEPT STATEMENT */
+.concept-section {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--grey-20);
+}
+.concept-left {
+  padding: 5rem 3rem; border-right: 1px solid var(--grey-20);
+}
+.concept-heading {
+  font-family: var(--font-serif); font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400; line-height: 1.25; color: var(--white); margin-bottom: 2rem;
+}
+.concept-heading em { font-style: italic; color: var(--grey-60); }
+.concept-body { font-size: 0.75rem; line-height: 2.1; color: var(--grey-60); }
+.concept-body p + p { margin-top: 1.2rem; }
+.concept-body strong { color: var(--white); font-weight: 500; }
+.concept-right { padding: 5rem 3rem; }
+.concept-refs-title { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--grey-40); margin-bottom: 1.5rem; }
+.ref-item { padding: 1.2rem 0; border-bottom: 1px solid var(--grey-20); }
+.ref-item-name { font-family: var(--font-serif); font-size: 0.95rem; color: var(--white); margin-bottom: 0.2rem; }
+.ref-item-note { font-size: 0.65rem; line-height: 1.7; color: var(--grey-60); }
+.color-palette-strip { display: flex; height: 40px; margin-top: 2.5rem; }
+.cp-swatch { flex: 1; }
+.palette-label { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey-40); margin-top: 0.5rem; }
+
+/* LOOKS */
+.looks-header {
+  padding: 4rem 2.5rem 2rem;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  border-bottom: 1px solid var(--grey-20);
+}
+.looks-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); line-height: 0.9; }
+.looks-count { font-size: 0.6rem; letter-spacing: 0.22em; color: var(--grey-40); text-transform: uppercase; }
+
+.looks-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--grey-20); }
+
+.look-card {
+  background: var(--black); position: relative;
+  aspect-ratio: 3/4; display: flex; flex-direction: column;
+  overflow: hidden; cursor: none;
+}
+.look-card:hover .look-info { opacity: 1; transform: translateY(0); }
+.look-visual {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.look-abstract {
+  position: absolute; inset: 0;
+}
+/* CSS-only garment silhouettes */
+.silhouette-1 {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 55%; background: #1a1a1a;
+  height: 80%;
+  clip-path: polygon(20% 0%, 80% 0%, 95% 10%, 100% 100%, 0% 100%, 5% 10%);
+}
+.silhouette-2 {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 50%; background: #111;
+  height: 85%;
+  clip-path: polygon(15% 0%, 85% 0%, 90% 5%, 100% 100%, 0% 100%, 10% 5%);
+}
+.silhouette-2::after {
+  content:''; position:absolute; top:0; left:15%; right:15%;
+  height:30%; background:#0a0a0a;
+}
+.silhouette-3 {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; background: #151515;
+  height: 80%;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+}
+.silhouette-4 {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 45%; background: #1c1c1c;
+  height: 90%;
+}
+.silhouette-4::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:35%; background:#121212; border-radius:0;
+}
+.silhouette-5 {
+  position: absolute; bottom: 0; left: 30%;
+  width: 25%; background: #141414;
+  height: 85%;
+}
+.silhouette-5-2 {
+  position: absolute; bottom: 0; left: 55%;
+  width: 22%; background: #1a1a1a;
+  height: 80%;
+}
+.silhouette-6 {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 65%; background: var(--off-white);
+  height: 75%;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+  opacity: 0.85;
+}
+.look-num {
+  position: absolute; top: 1.5rem; left: 1.5rem;
+  font-family: var(--font-display); font-size: 0.75rem;
+  letter-spacing: 0.25em; color: var(--grey-40);
+}
+.look-texture {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+}
+.look-info {
+  padding: 1.5rem; background: rgba(8,8,8,0.95);
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.look-piece { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey-40); margin-bottom: 0.3rem; }
+.look-name { font-family: var(--font-serif); font-weight: 400; color: var(--white); font-size: 0.9rem; margin-bottom: 0.4rem; }
+.look-desc { font-size: 0.62rem; line-height: 1.7; color: var(--grey-60); }
+.look-materials { margin-top: 0.5rem; font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-40); }
+
+/* PROCESS */
+.process-section { padding: 6rem 2.5rem; border-top: 1px solid var(--grey-20); }
+.process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+.process-step { padding: 2rem; background: var(--grey-10); border: 1px solid var(--grey-20); }
+.step-num { font-family: var(--font-display); font-size: 3rem; color: var(--grey-20); line-height: 1; margin-bottom: 1rem; }
+.step-title { font-family: var(--font-serif); font-size: 1rem; color: var(--white); margin-bottom: 0.5rem; }
+.step-text { font-size: 0.68rem; line-height: 1.8; color: var(--grey-60); }
+
+@media (max-width: 900px) {
+  .project-hero { grid-template-columns: 1fr; }
+  .concept-section { grid-template-columns: 1fr; }
+  .concept-left { border-right: none; border-bottom: 1px solid var(--grey-20); }
+  .looks-grid { grid-template-columns: 1fr 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 550px) {
+  .looks-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../pages/about.html">About</a></li>
+    <li><a href="../../pages/work.html">Work</a></li>
+    <li><a href="../../pages/contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <div>
+    <p class="ph-badge reveal">Project 004 — Design Concept — 2024</p>
+    <h1 class="ph-title reveal d1">VOID<br/>Lookbook<br/>Concept</h1>
+    <p class="ph-desc reveal d2">A six-look fictional capsule collection concept exploring deconstructivist minimal aesthetics. No physical garments—a pure design thinking and visual communication exercise.</p>
+    <div class="ph-honest reveal d3">
+      <strong>Honest note:</strong> I cannot sew. This collection exists only as a concept—descriptions, silhouette sketches in Figma, and this web presentation. I built it to practise thinking like a fashion designer: understanding garment construction vocabulary, research methodology, and collection coherence. Inspired by Margiela SS1989 and the Artisanal collections.
+    </div>
+  </div>
+  <div class="ph-meta reveal d2">
+    <div><div class="ph-meta-label">Year</div><div class="ph-meta-value">2024</div></div>
+    <div><div class="ph-meta-label">Process</div><div class="ph-meta-value">Research → Concept → Figma Layouts → Web Presentation</div></div>
+    <div><div class="ph-meta-label">Tools Used</div><div class="ph-meta-value">Figma · HTML/CSS · Fashion archive research</div></div>
+    <a href="../../pages/work.html" class="btn dark">← Back to Work</a>
+  </div>
+</div>
+
+<!-- COLLECTION TITLE -->
+<div class="collection-header">
+  <p class="collection-season reveal">Concept Collection — No Season</p>
+  <h2 class="collection-name reveal d1">VOID</h2>
+  <p class="collection-subname reveal d2">"The garment as its own absence"</p>
+  <p class="collection-note reveal d3">
+    A concept exploration. Six looks. No physical samples.<br/>
+    Research-based design thinking exercise by a CS graduate<br/>
+    learning to think in fashion.
+  </p>
+</div>
+
+<!-- CONCEPT -->
+<div class="concept-section">
+  <div class="concept-left">
+    <h2 class="concept-heading reveal">
+      What remains<br/>
+      when you remove<br/>
+      <em>everything unnecessary?</em>
+    </h2>
+    <div class="concept-body reveal d1">
+      <p>VOID is a six-piece conceptual study in the aesthetics of <strong>reduction</strong>. Inspired by Margiela's early Artisanal work and the Japanese concept of <em>ma</em>—negative space as active presence—the collection explores what happens when a garment is stripped to its structural minimum.</p>
+      <p>The palette is deliberately constrained: <strong>charcoal, off-white, and concrete grey</strong>. No colour to distract from form. No decoration to mask construction. Every decision was a subtraction.</p>
+      <p>As a CS student, I found this analogous to writing clean code: the best function does exactly one thing, with no redundant operations. A garment, I am learning, can follow the same discipline.</p>
+    </div>
+  </div>
+  <div class="concept-right reveal d1">
+    <p class="concept-refs-title">Research References</p>
+    <div class="ref-item">
+      <div class="ref-item-name">Martin Margiela — Artisanal SS1989</div>
+      <div class="ref-item-note">Deconstructed tailoring. The jacket lining worn as the garment. What is inside, outside.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-item-name">Rei Kawakubo — Comme des Garçons AW1982</div>
+      <div class="ref-item-note">"Hiroshima chic". Black asymmetry as refusal of Western beauty conventions.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-item-name">Yohji Yamamoto — AW1983</div>
+      <div class="ref-item-note">The wrap coat. One piece of cloth, structurally complex, apparently simple.</div>
+    </div>
+    <div class="ref-item">
+      <div class="ref-item-name">Issey Miyake — A-POC 1998</div>
+      <div class="ref-item-note">A piece of cloth. The wearer decides the shape. Minimum material, maximum range.</div>
+    </div>
+    <p class="concept-refs-title" style="margin-top:2rem;">Collection Palette</p>
+    <div class="color-palette-strip">
+      <div class="cp-swatch" style="background:#1a1a1a"></div>
+      <div class="cp-swatch" style="background:#2e2e2e"></div>
+      <div class="cp-swatch" style="background:#555"></div>
+      <div class="cp-swatch" style="background:#888"></div>
+      <div class="cp-swatch" style="background:#ccc"></div>
+      <div class="cp-swatch" style="background:#e8e0d0"></div>
+    </div>
+    <p class="palette-label">Charcoal · Carbon · Slate · Ash · Linen · Ecru</p>
+  </div>
+</div>
+
+<!-- LOOKS -->
+<div class="looks-header">
+  <h2 class="looks-title reveal">SIX<br/>LOOKS</h2>
+  <span class="looks-count reveal d2">Concept sketches — Hover to explore</span>
+</div>
+
+<div class="looks-grid">
+  <div class="look-card reveal">
+    <div class="look-visual">
+      <div class="look-abstract">
+        <div class="silhouette-1"></div>
+        <div class="look-texture"></div>
+      </div>
+      <span class="look-num">I</span>
+    </div>
+    <div class="look-info">
+      <p class="look-piece">Look 01</p>
+      <p class="look-name">The Inside Out Coat</p>
+      <p class="look-desc">Structured wool overcoat worn with seams and canvas interlining exposed. The construction becomes the surface.</p>
+      <p class="look-materials">Concept: Wool flannel · Canvas · Exposed seaming</p>
+    </div>
+  </div>
+  <div class="look-card reveal d1">
+    <div class="look-visual">
+      <div class="look-abstract">
+        <div class="silhouette-2"></div>
+        <div class="look-texture"></div>
+      </div>
+      <span class="look-num">II</span>
+    </div>
+    <div class="look-info">
+      <p class="look-piece">Look 02</p>
+      <p class="look-name">The Collapsed Shirt</p>
+      <p class="look-desc">Oversized dress shirt in off-white cotton, collar removed, placket open. The shirt as architecture without walls.</p>
+      <p class="look-materials">Concept: 100% cotton poplin · No interfacing</p>
+    </div>
+  </div>
+  <div class="look-card reveal d2">
+    <div class="look-visual">
+      <div class="look-abstract">
+        <div class="silhouette-3"></div>
+        <div class="look-texture"></div>
+      </div>
+      <span class="look-num">III</span>
+    </div>
+    <div class="look-info">
+      <p class="look-piece">Look 03</p>
+      <p class="look-name">The Trapezoid</p>
+      <p class="look-desc">A single panel of wool crepe cut in a perfect trapezoid. Two side seams. One hem. No dart. No zipper. Form through geometry alone.</p>
+      <p class="look-materials">Concept: Wool crepe · Minimal construction</p>
+    </div>
+  </div>
+  <div class="look-card reveal">
+    <div class="look-visual">
+      <div class="look-abstract">
+        <div class="silhouette-4"></div>
+        <div class="look-texture"></div>
+      </div>
+      <span class="look-num">IV</span>
+    </div>
+    <div class="look-info">
+      <p class="look-piece">Look 04</p>
+      <p class="look-name">The Binding</p>
+      <p class="look-desc">A long vest with visible basting stitches—the tailor's temporary marks made permanent. The in-progress garment as the finished garment.</p>
+      <p class="look-materials">Concept: Unfinished grey flannel · Contrast basting</p>
+    </div>
+  </div>
+  <div class="look-card reveal d1">
+    <div class="look-visual">
+      <div class="look-abstract">
+        <div class="silhouette-5"></div>
+        <div class="silhouette-5-2"></div>
+        <div class="look-texture"></div>
+      </div>
+      <span class="look-num">V</span>
+    </div>
+    <div class="look-info">
+      <p class="look-piece">Look 05</p>
+      <p class="look-name">The Divided Trouser</p>
+      <p class="look-desc">Two individual trouser legs, each worn as a separate element—one worn, one carried. The pair as two distinct objects.</p>
+      <p class="look-materials">Concept: Charcoal wool · Deconstructed tailoring</p>
+    </div>
+  </div>
+  <div class="look-card reveal d2">
+    <div class="look-visual">
+      <div class="look-abstract">
+        <div class="silhouette-6"></div>
+        <div class="look-texture"></div>
+      </div>
+      <span class="look-num">VI</span>
+    </div>
+    <div class="look-info">
+      <p class="look-piece">Look 06</p>
+      <p class="look-name">The White Study</p>
+      <p class="look-desc">The only light piece in the collection. An ecru linen smock of maximum simplicity—as a question: what is the minimum a garment needs to be a garment?</p>
+      <p class="look-materials">Concept: Ecru linen · Single seam construction</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div class="process-section">
+  <div class="section-tag reveal">How I made this</div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <div class="step-title">Research</div>
+      <p class="step-text">Four weeks studying the Margiela Artisanal collections, Japanese avant-garde fashion of the 1980s, and the design theory of deconstruction. Read Judith Clark's writing on fashion archives.</p>
+    </div>
+    <div class="process-step reveal d1">
+      <div class="step-num">02</div>
+      <div class="step-title">Concept Development</div>
+      <p class="step-text">Wrote a concept statement. Defined constraints: six looks, three colours maximum, each piece must have a conceptual rationale. Sketched silhouettes in Figma using basic geometric shapes.</p>
+    </div>
+    <div class="process-step reveal d2">
+      <div class="step-num">03</div>
+      <div class="step-title">Web Presentation</div>
+      <p class="step-text">Built this page entirely in HTML and CSS. The silhouettes are CSS geometry—not images. The goal was to communicate the concept without photography, since there are no physical garments.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Project 004 — VOID Lookbook</span>
+  <div class="footer-links">
+    <a href="../../pages/work.html">All Projects</a>
+    <a href="../../pages/contact.html">Contact →</a>
+  </div>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

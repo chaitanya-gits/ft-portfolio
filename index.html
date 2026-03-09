@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio — Fashion × Technology</title>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+/* ── INDEX-ONLY STYLES ──────────────────────────────────────── */
+
+/* HERO */
+#hero {
+  height: 100vh; min-height: 600px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--grey-20);
+  overflow: hidden;
+}
+.hero-left {
+  padding: 7rem 2.5rem 3rem;
+  border-right: 1px solid var(--grey-20);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  position: relative;
+}
+.hero-label {
+  position: absolute; top: 48%; left: 2rem;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: left center;
+  font-size: 0.55rem; letter-spacing: 0.35em;
+  color: var(--grey-40); text-transform: uppercase;
+}
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 11vw, 10rem);
+  line-height: 0.87; letter-spacing:-0.01em;
+  color: var(--white);
+}
+.hero-name .outline {
+  -webkit-text-stroke: 1px var(--grey-40);
+  color: transparent;
+}
+.hero-sub {
+  margin-top: 2rem;
+  font-size: 0.63rem; letter-spacing: 0.22em;
+  color: var(--grey-50); text-transform: uppercase;
+  line-height: 2.3;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+
+.hero-right {
+  padding: 10rem 2.5rem 3rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.hero-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--grey-70);
+}
+.hero-quote em { color: var(--white); font-style: italic; }
+
+.hero-cta-row {
+  display: flex; gap: 1rem; align-items: center;
+}
+.hero-scroll {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.hero-scroll span {
+  font-size: 0.5rem; letter-spacing: 0.3em;
+  color: var(--grey-40); text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+.hero-scroll-line {
+  width:1px; height:50px;
+  background: linear-gradient(to bottom, transparent, var(--grey-50));
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100%{opacity:0.3;} 50%{opacity:1;}
+}
+
+/* MARQUEE */
+.marquee-bar {
+  background: var(--white);
+  height: 44px;
+  overflow: hidden; display: flex; align-items: center;
+}
+.marquee-inner {
+  display: flex; animation: scroll 20s linear infinite;
+  white-space: nowrap;
+}
+.marquee-inner span {
+  font-family: var(--font-display);
+  font-size: 0.85rem; letter-spacing: 0.4em;
+  color: var(--black); padding: 0 2.5rem;
+}
+.marquee-inner .sep { color: var(--grey-50); padding: 0 0.8rem; }
+@keyframes scroll {
+  from{transform:translateX(0);} to{transform:translateX(-50%);}
+}
+
+/* ABOUT STRIP */
+#about-strip {
+  background: var(--off-white); color: var(--black);
+  padding: 7rem 0;
+}
+#about-strip .container {
+  display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem;
+}
+.about-stats { display: flex; flex-direction: column; gap: 3rem; }
+.stat-num {
+  font-family: var(--font-display); font-size: 3.8rem; line-height:1;
+  color: var(--black);
+}
+.stat-label {
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  color: rgba(0,0,0,0.4); text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+.about-text {}
+.about-text .section-tag { color: rgba(0,0,0,0.4); }
+.about-text .section-tag::after { background: rgba(0,0,0,0.1); }
+.about-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600; line-height: 1.15;
+  color: var(--black); margin-bottom: 2rem;
+}
+.about-heading em { font-style: italic; color: rgba(0,0,0,0.45); }
+.about-para {
+  font-size: 0.78rem; line-height: 2.1;
+  color: rgba(0,0,0,0.6); margin-bottom: 1.2rem;
+}
+.about-para strong { color: var(--black); font-weight: 500; }
+.about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+.tag {
+  font-size: 0.55rem; letter-spacing: 0.18em;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(0,0,0,0.18);
+  text-transform: uppercase; color: rgba(0,0,0,0.5);
+  transition: all 0.25s;
+}
+.tag:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+/* PROJECTS */
+#projects {
+  background: var(--black); padding: 7rem 0;
+}
+.projects-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 4rem; padding-bottom: 2rem;
+  border-bottom: 1px solid var(--grey-20);
+}
+.projects-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.88;
+}
+.projects-note {
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  color: var(--grey-40); text-transform: uppercase;
+  text-align: right; line-height: 2;
+}
+.projects-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--grey-20);
+}
+.project-card {
+  background: var(--black); padding: 3rem;
+  position: relative; overflow: hidden;
+  min-height: 320px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: background 0.35s;
+}
+.project-card:hover { background: var(--grey-15); }
+.project-card.wide { grid-column: span 2; flex-direction: row; gap: 4rem; align-items: center; }
+.project-idx {
+  font-family: var(--font-display); font-size: 0.8rem;
+  letter-spacing: 0.3em; color: var(--grey-40);
+}
+.project-cat {
+  font-size: 0.55rem; letter-spacing: 0.22em;
+  color: var(--grey-40); text-transform: uppercase; margin-bottom: 1rem;
+}
+.project-title {
+  font-family: var(--font-serif); font-weight: 600;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  line-height: 1.15; color: var(--white);
+  margin-bottom: 0.8rem;
+}
+.project-title.lg { font-size: clamp(1.8rem, 3.5vw, 3rem); }
+.project-desc {
+  font-size: 0.7rem; line-height: 1.85;
+  color: var(--grey-50); margin-bottom: 1.5rem; max-width: 420px;
+}
+.project-honest {
+  display: inline-block;
+  font-size: 0.55rem; letter-spacing: 0.15em;
+  color: var(--grey-40); text-transform: uppercase;
+  border: 1px solid var(--grey-20); padding: 0.3rem 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.stack-tag {
+  font-size: 0.52rem; letter-spacing: 0.12em;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--grey-20); text-transform: uppercase;
+  color: var(--grey-50);
+}
+.project-arrow {
+  position: absolute; bottom: 3rem; right: 3rem;
+  font-family: var(--font-display); font-size: 1.8rem;
+  color: var(--grey-30);
+  transition: color 0.3s, transform 0.3s;
+}
+.project-card:hover .project-arrow { color: var(--white); transform: translate(4px,-4px); }
+.project-link { color: inherit; }
+
+/* PHILOSOPHY */
+#philosophy {
+  background: var(--grey-10);
+  display: grid; grid-template-columns: repeat(3,1fr);
+}
+.phil-item {
+  padding: 4rem 2.5rem;
+  border-right: 1px solid var(--grey-20);
+}
+.phil-item:last-child { border-right: none; }
+.phil-n {
+  font-family: var(--font-display); font-size: 5rem;
+  line-height: 1; color: var(--grey-20); margin-bottom: 2rem;
+}
+.phil-title {
+  font-family: var(--font-serif); font-weight: 600;
+  font-size: 1.25rem; color: var(--white); margin-bottom: 1rem; line-height: 1.2;
+}
+.phil-text {
+  font-size: 0.7rem; line-height: 1.9; color: var(--grey-50);
+}
+.phil-ref {
+  margin-top: 2rem; font-size: 0.55rem;
+  letter-spacing: 0.2em; color: var(--grey-40); text-transform: uppercase;
+}
+
+/* REFERENCES */
+#references {
+  background: var(--black); padding: 7rem 0;
+}
+.ref-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--grey-20);
+}
+.ref-card {
+  background: var(--grey-10); padding: 2.5rem;
+  min-height: 200px; display: flex; flex-direction: column;
+  justify-content: space-between;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.ref-card:hover { background: var(--grey-20); }
+.ref-name {
+  font-family: var(--font-serif); font-weight: 600;
+  font-size: 1.15rem; color: var(--white); line-height: 1.1;
+}
+.ref-role {
+  font-size: 0.55rem; letter-spacing: 0.2em;
+  color: var(--grey-50); text-transform: uppercase; margin-top: 0.3rem;
+}
+.ref-quote {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 0.75rem; line-height: 1.75; color: var(--grey-60);
+}
+.ref-badge {
+  position: absolute; bottom: 2rem; right: 2rem;
+  font-family: var(--font-display); font-size: 2rem;
+  color: var(--grey-20); line-height: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; height: auto; }
+  .hero-left { border-right: none; border-bottom: 1px solid var(--grey-20); min-height: 60vh; }
+  .hero-right { padding: 3rem 2.5rem; }
+  #about-strip .container { grid-template-columns: 1fr; gap: 3rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.wide { flex-direction: column; gap: 2rem; grid-column: span 1; }
+  #philosophy { grid-template-columns: 1fr; }
+  .phil-item { border-right: none; border-bottom: 1px solid var(--grey-20); }
+  .ref-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 550px) {
+  .ref-grid { grid-template-columns: 1fr; }
+  .projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pages/about.html">About</a></li>
+    <li><a href="pages/work.html">Work</a></li>
+    <li><a href="pages/contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-label">Index — 001 — Portfolio</span>
+    <h1 class="hero-name reveal-x">
+      CHAITANYA<br/>
+      <span class="outline">VALLURU</span>
+    </h1>
+    <p class="hero-sub reveal d2">
+      <strong>CS Graduate</strong> → Fashion Technology<br/>
+      Hyderabad, India → <strong>Milano, Italia</strong><br/>
+      Applying — <strong>IED / Istituto Marangoni 2025–26</strong>
+    </p>
+  </div>
+  <div class="hero-right">
+    <p class="hero-quote reveal d1">
+      A software engineer learning to<br/>
+      <em>read cloth the way I read code</em>—<br/>
+      one system at a time.
+    </p>
+    <div class="hero-cta-row reveal d3">
+      <a href="pages/work.html" class="btn">View Projects →</a>
+      <a href="pages/about.html" class="btn dark">About me</a>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span>scroll</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span>FASHION TECHNOLOGY</span><span class="sep">◆</span>
+    <span>CS GRADUATE</span><span class="sep">◆</span>
+    <span>DIGITAL DESIGN</span><span class="sep">◆</span>
+    <span>SELF-TAUGHT EXPLORER</span><span class="sep">◆</span>
+    <span>COMPUTATIONAL FASHION</span><span class="sep">◆</span>
+    <span>SYSTEMS THINKING</span><span class="sep">◆</span>
+    <span>ISTITUTO MARANGONI</span><span class="sep">◆</span>
+    <!-- duplicate for seamless -->
+    <span>FASHION TECHNOLOGY</span><span class="sep">◆</span>
+    <span>CS GRADUATE</span><span class="sep">◆</span>
+    <span>DIGITAL DESIGN</span><span class="sep">◆</span>
+    <span>SELF-TAUGHT EXPLORER</span><span class="sep">◆</span>
+    <span>COMPUTATIONAL FASHION</span><span class="sep">◆</span>
+    <span>SYSTEMS THINKING</span><span class="sep">◆</span>
+    <span>ISTITUTO MARANGONI</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- ══ ABOUT STRIP ════════════════════════════════════ -->
+<section id="about-strip">
+  <div class="container">
+    <div class="about-stats">
+      <div class="reveal">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Years — B.Tech CS</div>
+      </div>
+      <div class="reveal d1">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Self-initiated projects</div>
+      </div>
+      <div class="reveal d2">
+        <div class="stat-num">0→1</div>
+        <div class="stat-label">Journey — Tech to Fashion</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-tag reveal">001 — Who I am</div>
+      <h2 class="about-heading reveal d1">
+        Building the bridge<br/>
+        <em>between code</em><br/>
+        and cloth
+      </h2>
+      <p class="about-para reveal d2">
+        I am a Computer Science graduate from Hyderabad, India. I have spent four years studying <strong>software systems, data structures, and web development</strong>. I am now teaching myself fashion—its history, its construction, its language.
+      </p>
+      <p class="about-para reveal d3">
+        This portfolio documents that transition honestly. These projects are not polished professional work. They are <strong>first attempts, learning experiments, and proofs-of-concept</strong> built by someone who is serious enough to start before they feel ready.
+      </p>
+      <p class="about-para reveal d3">
+        I want to study fashion technology in Italy because I believe the most interesting work happens <strong>at the intersection</strong>—where programming meets pattern-making, where data meets drape.
+      </p>
+      <div class="about-tags reveal d4">
+        <span class="tag">HTML / CSS / JS</span>
+        <span class="tag">Python Basics</span>
+        <span class="tag">Colour Theory</span>
+        <span class="tag">Fashion History (self-study)</span>
+        <span class="tag">Figma</span>
+        <span class="tag">Adobe Illustrator</span>
+        <span class="tag">CLO 3D (learning)</span>
+        <span class="tag">Concept Development</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ═══════════════════════════════════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-header">
+      <h2 class="projects-title reveal">SELECTED<br/>WORK</h2>
+      <div class="projects-note reveal d2">
+        5 Projects — 2024–2026<br/>
+        Honest beginner work
+      </div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- P1: FEATURED -->
+      <div class="project-card wide reveal">
+        <div>
+          <p class="project-cat">Project 01 — Web App — 2025</p>
+          <h3 class="project-title lg">Digital Mood Board<br/>Generator</h3>
+          <p class="project-honest">★ First web project in fashion context</p>
+          <p class="project-desc">
+            A browser-based tool where you can build fashion mood boards by dragging colour swatches, uploading reference images, and adding text notes. Built with vanilla HTML, CSS, and JavaScript—no frameworks. Inspired by how designers at Maison Margiela compiled physical reference boards.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">HTML</span>
+            <span class="stack-tag">CSS</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">Drag & Drop API</span>
+          </div>
+        </div>
+        <a href="projects/moodboard/index.html" class="btn" style="align-self:flex-end;flex-shrink:0;">Open Project →</a>
+      </div>
+
+      <!-- P2 -->
+      <div class="project-card reveal">
+        <div>
+          <p class="project-idx">002</p>
+          <p class="project-cat">Utility Tool — 2025</p>
+          <h3 class="project-title">Outfit Colour<br/>Palette Tool</h3>
+          <p class="project-honest">★ Colour theory meets CSS</p>
+          <p class="project-desc">
+            Enter up to 5 clothing colours and get a harmony analysis—complementary, triadic, or analogous. Helped me understand colour theory from a fashion perspective. Built entirely in vanilla JS with HSL calculations.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">Colour Theory</span>
+            <span class="stack-tag">CSS Canvas</span>
+          </div>
+        </div>
+        <a href="projects/colorpalette/index.html" class="project-link">
+          <span class="project-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- P3 -->
+      <div class="project-card reveal d1">
+        <div>
+          <p class="project-idx">003</p>
+          <p class="project-cat">Utility Tool — 2024</p>
+          <h3 class="project-title">India → Italy<br/>Size Guide</h3>
+          <p class="project-honest">★ Practical problem I actually faced</p>
+          <p class="project-desc">
+            A size conversion tool for clothing and shoes between Indian and Italian standards. Built this to solve a real problem when researching Italian brands. Simple but functional. My first project combining design research with coding.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">HTML Forms</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">Responsive CSS</span>
+          </div>
+        </div>
+        <a href="projects/sizeguide/index.html" class="project-link">
+          <span class="project-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- P4 -->
+      <div class="project-card reveal">
+        <div>
+          <p class="project-idx">004</p>
+          <p class="project-cat">Concept Lookbook — 2024</p>
+          <h3 class="project-title">VOID — Minimal<br/>Lookbook Concept</h3>
+          <p class="project-honest">★ First fashion concept I designed</p>
+          <p class="project-desc">
+            A six-look fictional capsule collection concept for a deconstructivist minimal brand. No sewing—purely a design thinking and visual communication exercise. Layouts done in Figma, rendered as a web page. Inspired by Margiela SS1989.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Figma</span>
+            <span class="stack-tag">HTML/CSS</span>
+            <span class="stack-tag">Visual Concept</span>
+          </div>
+        </div>
+        <a href="projects/lookbook/index.html" class="project-link">
+          <span class="project-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- P5 -->
+      <div class="project-card reveal d1">
+        <div>
+          <p class="project-idx">005</p>
+          <p class="project-cat">TypeScript App — 2026</p>
+          <h3 class="project-title">Realtime Capsule<br/>Outfit Planner</h3>
+          <p class="project-honest">★ First TypeScript-first project</p>
+          <p class="project-desc">
+            A live outfit planning tool that updates recommendations as you change weather, occasion, and colour mood. Built with typed models and real-time UI updates while preserving this portfolio's minimal visual language.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">Realtime UI</span>
+            <span class="stack-tag">Design Systems</span>
+          </div>
+        </div>
+        <a href="projects/realtimeplanner/index.html" class="project-link">
+          <span class="project-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PHILOSOPHY ══════════════════════════════════════ -->
+<section id="philosophy">
+  <div class="phil-item reveal">
+    <div class="phil-n">01</div>
+    <h3 class="phil-title">Start before<br/>you're ready</h3>
+    <p class="phil-text">Every project in this portfolio was built while I was still learning. The act of making is how I learn. I would rather show imperfect work than explain perfect intentions.</p>
+    <p class="phil-ref">Personal principle</p>
+  </div>
+  <div class="phil-item reveal d1">
+    <div class="phil-n">02</div>
+    <h3 class="phil-title">Systems as<br/>aesthetic</h3>
+    <p class="phil-text">CS trained me to see structure everywhere. Fashion is not decoration—it is a system of silhouette, proportion, construction, and context. I approach both the same way.</p>
+    <p class="phil-ref">After Issey Miyake</p>
+  </div>
+  <div class="phil-item reveal d2">
+    <div class="phil-n">03</div>
+    <h3 class="phil-title">Honesty over<br/>performance</h3>
+    <p class="phil-text">I am not pretending to be a fashion designer. I am a software engineer who is learning fashion seriously. That specificity—not false confidence—is my strongest asset.</p>
+    <p class="phil-ref">Core admission statement</p>
+  </div>
+</section>
+
+<!-- ══ REFERENCES ══════════════════════════════════════ -->
+<section id="references">
+  <div class="container">
+    <div class="section-tag reveal">004 — Creative References</div>
+    <div class="ref-grid">
+      <div class="ref-card reveal">
+        <div>
+          <h3 class="ref-name">Martin Margiela</h3>
+          <p class="ref-role">Deconstruction</p>
+        </div>
+        <p class="ref-quote">"The label removed. The seam reversed. The garment as its own critique."</p>
+        <span class="ref-badge">MM</span>
+      </div>
+      <div class="ref-card reveal d1">
+        <div>
+          <h3 class="ref-name">Yeezy / Ye</h3>
+          <p class="ref-role">Minimal Utility</p>
+        </div>
+        <p class="ref-quote">"Fashion as infrastructure. The oversized silhouette as cultural monument."</p>
+        <span class="ref-badge">YZ</span>
+      </div>
+      <div class="ref-card reveal d2">
+        <div>
+          <h3 class="ref-name">Issey Miyake</h3>
+          <p class="ref-role">Technology + Cloth</p>
+        </div>
+        <p class="ref-quote">"A single piece of cloth. Infinite structural possibility through fold."</p>
+        <span class="ref-badge">IM</span>
+      </div>
+      <div class="ref-card reveal d3">
+        <div>
+          <h3 class="ref-name">Jil Sander</h3>
+          <p class="ref-role">Radical Simplicity</p>
+        </div>
+        <p class="ref-quote">"Remove everything unnecessary. What remains should be inevitable."</p>
+        <span class="ref-badge">JS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-logo">FT — Fashion Technology Portfolio</span>
+  <div class="footer-links">
+    <a href="pages/about.html">About</a>
+    <a href="pages/work.html">Work</a>
+    <a href="pages/contact.html">Contact</a>
+  </div>
+  <span class="footer-copy">© 2025 — All rights reserved</span>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+
+
+
+

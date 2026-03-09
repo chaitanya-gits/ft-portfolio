@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — Fashion × Technology Portfolio</title>
+<link rel="stylesheet" href="../css/style.css"/>
+<style>
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1.5fr;
+  gap: 0; border-top: 1px solid var(--grey-20);
+}
+.about-sidebar {
+  padding: 4rem 2.5rem;
+  border-right: 1px solid var(--grey-20);
+  position: sticky; top: 80px;
+  height: fit-content;
+}
+.sidebar-section { margin-bottom: 3.5rem; }
+.sidebar-heading {
+  font-size: 0.58rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--grey-40);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.75rem; border-bottom: 1px solid var(--grey-20);
+}
+.sidebar-list { list-style: none; }
+.sidebar-list li {
+  font-size: 0.72rem; line-height: 2;
+  color: var(--grey-60); padding: 0.15rem 0;
+}
+.sidebar-list li strong { color: var(--white); font-weight: 500; }
+.sidebar-list li .year {
+  font-size: 0.55rem; color: var(--grey-40);
+  margin-left: 0.5rem;
+}
+
+.about-main { padding: 4rem 3rem; }
+.about-main .section-tag { margin-bottom: 2rem; }
+
+.big-statement {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 600; line-height: 1.25;
+  color: var(--white); margin-bottom: 3rem;
+}
+.big-statement em { color: var(--grey-60); font-style: italic; }
+
+.body-block { margin-bottom: 2.5rem; }
+.body-label {
+  font-size: 0.55rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--grey-40);
+  margin-bottom: 0.75rem; display: block;
+}
+.body-text {
+  font-size: 0.78rem; line-height: 2.1; color: var(--grey-60);
+}
+.body-text strong { color: var(--white); font-weight: 500; }
+.body-text + .body-text { margin-top: 1rem; }
+
+.divider-line {
+  height: 1px; background: var(--grey-20); margin: 3rem 0;
+}
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+  width: 1px; background: var(--grey-20);
+}
+.tl-item { margin-bottom: 2.5rem; position: relative; }
+.tl-dot {
+  position: absolute; left: -1.5rem; top: 5px;
+  width: 7px; height: 7px;
+  border: 1px solid var(--grey-40); border-radius: 50%;
+  background: var(--black);
+  transform: translateX(-3px);
+}
+.tl-year {
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  color: var(--grey-40); text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.tl-title {
+  font-family: var(--font-serif); font-weight: 600;
+  font-size: 1rem; color: var(--white); margin-bottom: 0.3rem;
+}
+.tl-detail {
+  font-size: 0.68rem; line-height: 1.8; color: var(--grey-50);
+}
+
+/* SKILLS TABLE */
+.skills-table { width: 100%; border-collapse: collapse; }
+.skills-table tr { border-bottom: 1px solid var(--grey-20); }
+.skills-table td {
+  padding: 0.85rem 0; font-size: 0.7rem; vertical-align: middle;
+}
+.skills-table td:first-child {
+  color: var(--grey-70); letter-spacing: 0.08em; text-transform: uppercase;
+  width: 40%;
+}
+.skills-table td:last-child { text-align: right; }
+.level-bar {
+  display: inline-flex; gap: 3px; align-items: center;
+}
+.level-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  border: 1px solid var(--grey-40);
+}
+.level-dot.filled { background: var(--white); border-color: var(--white); }
+.level-word {
+  font-size: 0.55rem; letter-spacing: 0.15em;
+  color: var(--grey-40); text-transform: uppercase; margin-left: 0.5rem;
+}
+
+/* STATEMENT BOX */
+.statement-box {
+  background: var(--grey-10); border: 1px solid var(--grey-20);
+  padding: 2.5rem; margin-top: 3rem;
+}
+.statement-box blockquote {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 1.15rem; line-height: 1.7;
+  color: var(--white); font-weight: 300;
+}
+.statement-box cite {
+  display: block; margin-top: 1rem;
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  color: var(--grey-40); text-transform: uppercase;
+  font-style: normal;
+}
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-sidebar { position: static; border-right: none; border-bottom: 1px solid var(--grey-20); }
+  .about-main { padding: 3rem 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-header-title reveal-x">ABOUT<br/>ME</h1>
+  <div class="page-header-meta reveal d2">
+    CS Graduate<br/>
+    Fashion Technology Applicant<br/>
+    Hyderabad, India
+  </div>
+</div>
+
+<div class="about-grid">
+
+  <!-- SIDEBAR -->
+  <aside class="about-sidebar">
+    <div class="sidebar-section reveal">
+      <p class="sidebar-heading">Education</p>
+      <ul class="sidebar-list">
+        <li><strong>B.Tech — Computer Science</strong><span class="year">2021–25</span></li>
+        <li>JNTU / Osmania University, Hyderabad</li>
+        <li style="margin-top:0.5rem; color:var(--grey-40)">GPA: [Your GPA]</li>
+      </ul>
+    </div>
+    <div class="sidebar-section reveal d1">
+      <p class="sidebar-heading">Target Institutions</p>
+      <ul class="sidebar-list">
+        <li><strong>Istituto Marangoni</strong> — Milano</li>
+        <li>Fashion Technology program</li>
+        <li style="margin-top:0.5rem;"><strong>IED Milano</strong></li>
+        <li>Digital Fashion Design</li>
+      </ul>
+    </div>
+    <div class="sidebar-section reveal d2">
+      <p class="sidebar-heading">Technical Skills</p>
+      <ul class="sidebar-list">
+        <li><strong>Proficient:</strong> HTML, CSS, JS</li>
+        <li><strong>Proficient:</strong> Python, Java</li>
+        <li><strong>Learning:</strong> CLO 3D</li>
+        <li><strong>Learning:</strong> Figma Advanced</li>
+        <li><strong>Familiar:</strong> Adobe Illustrator</li>
+        <li><strong>Familiar:</strong> Blender (basics)</li>
+      </ul>
+    </div>
+    <div class="sidebar-section reveal d3">
+      <p class="sidebar-heading">Languages</p>
+      <ul class="sidebar-list">
+        <li><strong>English</strong> — Fluent</li>
+        <li><strong>Telugu</strong> — Native</li>
+        <li><strong>Hindi</strong> — Conversational</li>
+        <li><strong>Italian</strong> — Beginner (learning)</li>
+      </ul>
+    </div>
+    <a href="contact.html" class="btn reveal d4" style="width:100%; justify-content:center; margin-top:1rem;">
+      Get in touch →
+    </a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="about-main">
+    <div class="section-tag reveal">002 — Full profile</div>
+
+    <h2 class="big-statement reveal d1">
+      Four years learning<br/>
+      to build systems.<br/>
+      <em>Now learning to build clothes.</em>
+    </h2>
+
+    <div class="body-block reveal d2">
+      <span class="body-label">Who I am</span>
+      <p class="body-text">
+        My name is <strong>Chaitanya Valluru</strong>. I grew up in Hyderabad, India, and spent four years studying Computer Science. I wrote my first line of code at 16. I became genuinely interested in fashion at 21—not as a consumer, but as a student of its systems: how collections are conceived, how silhouettes communicate, how a brand like Maison Margiela can make the absence of branding into its loudest statement.
+      </p>
+      <p class="body-text" style="margin-top:1rem;">
+        I am applying to fashion schools in Italy because I believe the next generation of fashion practice will be built by people who can move between <strong>code and cloth</strong> without friction. I want to be one of those people—and I am willing to start from the very beginning to get there.
+      </p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <div class="body-block reveal">
+      <span class="body-label">My CS Background</span>
+      <p class="body-text">
+        My undergraduate work focused on <strong>web development, data structures, and backend systems</strong>. I built projects in Node.js, Java, and Python. I learned to think about problems architecturally—breaking them into components, understanding dependencies, managing complexity. This kind of thinking, I am discovering, translates surprisingly well to fashion design.
+      </p>
+      <p class="body-text" style="margin-top:1rem;">
+        A garment is a system. A collection is an architecture. A brand is a language with grammar rules. I did not know this when I started studying fashion, but it is what keeps me studying.
+      </p>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- JOURNEY TIMELINE -->
+    <div class="body-block reveal">
+      <span class="body-label">How I got here</span>
+      <div class="timeline" style="margin-top:1.5rem;">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2021</div>
+          <div class="tl-title">Started B.Tech in Computer Science</div>
+          <div class="tl-detail">Hyderabad. Learned programming fundamentals, data structures, web development.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2023</div>
+          <div class="tl-title">First encounter with fashion theory</div>
+          <div class="tl-detail">Read about Margiela by accident. Watched "<em>The First Monday in May</em>". Realised fashion is a serious intellectual discipline.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2024</div>
+          <div class="tl-title">Started self-studying fashion</div>
+          <div class="tl-detail">History of 20th century fashion. Colour theory. Textile basics. Watched every Margiela documentary I could find.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2024–25</div>
+          <div class="tl-title">Built first fashion-tech projects</div>
+          <div class="tl-detail">Mood board tool, colour palette app, size guide converter, VOID lookbook concept. All in this portfolio.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2025</div>
+          <div class="tl-title">Applying to Istituto Marangoni + IED Milano</div>
+          <div class="tl-detail">Building this portfolio. Learning Italian. Preparing the statement of purpose.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- SKILLS TABLE -->
+    <div class="body-block reveal">
+      <span class="body-label">Skills — Honest Assessment</span>
+      <table class="skills-table" style="margin-top:1.5rem;">
+        <tr>
+          <td>HTML / CSS / JavaScript</td>
+          <td>
+            <div class="level-bar">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+              <span class="level-word">Advanced</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Python / Java</td>
+          <td>
+            <div class="level-bar">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+              <span class="level-word">Proficient</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Figma / Adobe Illustrator</td>
+          <td>
+            <div class="level-bar">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+              <span class="level-word">Intermediate</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>CLO 3D</td>
+          <td>
+            <div class="level-bar">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+              <span class="level-word">Learning</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Fashion History</td>
+          <td>
+            <div class="level-bar">
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+              <span class="level-word">Self-taught</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Garment Construction</td>
+          <td>
+            <div class="level-bar">
+              <div class="level-dot filled"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+              <div class="level-dot"></div>
+              <span class="level-word">Beginner</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="statement-box reveal">
+      <blockquote>
+        "I am not applying because I am already a fashion designer. I am applying because I am determined to become one—and I have a technical foundation that I believe, with the right education, can become an asset to the field."
+      </blockquote>
+      <cite>— Personal Statement, 2025</cite>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">FT — About</span>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
+

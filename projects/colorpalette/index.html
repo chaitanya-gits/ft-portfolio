@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Outfit Colour Palette — Project 02</title>
+<link rel="stylesheet" href="../../css/style.css"/>
+<style>
+body { background: var(--grey-10); }
+
+.project-hero {
+  background: var(--black); padding: 9rem 2.5rem 4rem;
+  border-bottom: 1px solid var(--grey-20);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+}
+.ph-badge { font-size:0.58rem; letter-spacing:0.3em; color:var(--grey-40); text-transform:uppercase; margin-bottom:1.5rem; }
+.ph-title { font-family:var(--font-display); font-size:clamp(2.5rem,6vw,5rem); line-height:0.9; margin-bottom:1.5rem; }
+.ph-desc { font-size:0.78rem; line-height:2; color:var(--grey-60); }
+.ph-honest { margin-top:1.5rem; padding:1rem 1.5rem; background:var(--grey-10); border-left:2px solid var(--grey-30); font-size:0.68rem; line-height:1.75; color:var(--grey-50); font-style:italic; }
+.ph-meta { display:flex; flex-direction:column; gap:2rem; justify-content:flex-end; }
+.ph-meta-label { font-size:0.52rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--grey-40); margin-bottom:0.3rem; }
+.ph-meta-value { font-size:0.78rem; color:var(--grey-70); line-height:1.8; }
+
+/* APP */
+.app-section { padding: 4rem 2.5rem; max-width: 900px; margin: 0 auto; }
+.app-title { font-family:var(--font-display); font-size:1.5rem; letter-spacing:0.2em; margin-bottom:2rem; }
+.color-slots { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
+.color-slot {
+  display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+}
+.slot-preview {
+  width:60px; height:60px;
+  border:1px solid var(--grey-20);
+  cursor:none; transition:transform 0.15s;
+}
+.slot-preview:hover { transform:scale(1.05); }
+.slot-input {
+  width:60px; background:var(--grey-10); border:1px solid var(--grey-20);
+  color:var(--white); font-family:var(--font-body); font-size:0.55rem;
+  padding:0.3rem 0.4rem; text-align:center; letter-spacing:0.05em;
+  outline:none; cursor:none;
+}
+.slot-label { font-size:0.5rem; letter-spacing:0.2em; color:var(--grey-40); text-transform:uppercase; }
+.slot-color-picker { display:none; }
+
+.analyze-btn {
+  background:var(--white); color:var(--black); border:none;
+  font-family:var(--font-body); font-size:0.65rem; letter-spacing:0.25em;
+  text-transform:uppercase; padding:0.9rem 2.5rem; cursor:none;
+  transition:background 0.2s; margin-bottom:3rem;
+}
+.analyze-btn:hover { background:var(--grey-90); }
+
+/* RESULTS */
+.results { display:none; }
+.results.show { display:block; }
+.result-section { margin-bottom:3rem; }
+.result-label { font-size:0.58rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--grey-40); margin-bottom:1.2rem; padding-bottom:0.5rem; border-bottom:1px solid var(--grey-20); }
+.harmony-card {
+  background:var(--black); border:1px solid var(--grey-20);
+  padding:2rem; margin-bottom:1rem;
+}
+.harmony-name { font-family:var(--font-serif); font-size:1.2rem; font-weight:600; color:var(--white); margin-bottom:0.5rem; }
+.harmony-score { display:flex; align-items:center; gap:1rem; margin-bottom:0.75rem; }
+.score-num { font-family:var(--font-display); font-size:2rem; color:var(--white); line-height:1; }
+.score-bar { flex:1; height:2px; background:var(--grey-20); }
+.score-fill { height:2px; background:var(--white); transition:width 1s var(--ease-out); }
+.harmony-desc { font-size:0.7rem; line-height:1.85; color:var(--grey-60); }
+.harmony-verdict { margin-top:0.75rem; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; }
+.verdict-good { color:#88bb88; }
+.verdict-ok   { color:#bbaa66; }
+.verdict-poor { color:#bb7766; }
+
+.palette-display { display:flex; height:60px; border:1px solid var(--grey-20); overflow:hidden; margin-bottom:1.5rem; }
+.palette-segment { flex:1; transition:flex 0.5s; }
+
+.suggestion-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.suggestion-card {
+  background:var(--black); border:1px solid var(--grey-20);
+  padding:1.5rem;
+}
+.suggestion-title { font-family:var(--font-serif); font-size:0.9rem; color:var(--white); margin-bottom:0.5rem; }
+.suggestion-swatches { display:flex; gap:4px; margin-bottom:0.75rem; }
+.sug-swatch { width:24px; height:24px; border:1px solid var(--grey-20); }
+.suggestion-text { font-size:0.65rem; line-height:1.7; color:var(--grey-60); }
+
+.outfit-notes { background:var(--grey-10); border:1px solid var(--grey-20); padding:2rem; }
+.outfit-notes p { font-family:var(--font-serif); font-size:0.9rem; line-height:1.75; color:var(--grey-60); font-style:italic; }
+
+@media (max-width:900px) { .project-hero{grid-template-columns:1fr;} .suggestion-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../pages/about.html">About</a></li>
+    <li><a href="../../pages/work.html">Work</a></li>
+    <li><a href="../../pages/contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <div>
+    <p class="ph-badge reveal">Project 002 — Utility Tool — 2025</p>
+    <h1 class="ph-title reveal d1">Outfit Colour<br/>Palette<br/>Analyser</h1>
+    <p class="ph-desc reveal d2">Enter up to 5 clothing colours and receive a harmony analysis. Tells you whether your outfit palette is complementary, analogous, or triadic—and scores it.</p>
+    <div class="ph-honest reveal d3">
+      <strong>Honest note:</strong> I built this while reading about colour theory for the first time. I wanted to understand why certain outfit combinations feel right. The scoring is simplified—not scientifically precise—but it taught me a lot about HSL colour spaces.
+    </div>
+  </div>
+  <div class="ph-meta reveal d2">
+    <div>
+      <div class="ph-meta-label">Year</div>
+      <div class="ph-meta-value">2025</div>
+    </div>
+    <div>
+      <div class="ph-meta-label">Stack</div>
+      <div class="ph-meta-value">Vanilla JavaScript · HSL calculations · CSS</div>
+    </div>
+    <div>
+      <div class="ph-meta-label">What I learned</div>
+      <div class="ph-meta-value">Colour theory, HSL vs RGB, how designers think about palette building</div>
+    </div>
+    <a href="../../pages/work.html" class="btn dark">← Back to Work</a>
+  </div>
+</div>
+
+<div class="app-section">
+  <div class="section-tag reveal">Try it — enter your outfit colours</div>
+  <div class="color-slots reveal d1" id="colorSlots"></div>
+  <button class="analyze-btn reveal d2" onclick="analyzeColors()">Analyse Palette →</button>
+
+  <div class="results" id="results">
+    <div class="result-section">
+      <div class="result-label">Your Palette</div>
+      <div class="palette-display" id="paletteDisplay"></div>
+    </div>
+    <div class="result-section">
+      <div class="result-label">Harmony Analysis</div>
+      <div id="harmonyResults"></div>
+    </div>
+    <div class="result-section">
+      <div class="result-label">Suggested Additions</div>
+      <div class="suggestion-grid" id="suggestions"></div>
+    </div>
+    <div class="result-section">
+      <div class="result-label">Outfit Notes</div>
+      <div class="outfit-notes" id="outfitNotes"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Project 002 — Colour Palette</span>
+  <div class="footer-links">
+    <a href="../../pages/work.html">All Projects</a>
+    <a href="../sizeguide/index.html">Next Project →</a>
+  </div>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script src="../../js/main.js"></script>
+<script>
+const defaultColors = ['#1a1a1a','#e8e0d0','#888480','',''];
+
+// Build slots
+const slotsEl = document.getElementById('colorSlots');
+defaultColors.forEach((col, i) => {
+  slotsEl.innerHTML += `
+  <div class="color-slot">
+    <div class="slot-preview" id="preview${i}" style="background:${col||'#222'}"
+         onclick="document.getElementById('picker${i}').click()"></div>
+    <input class="slot-input" id="hex${i}" type="text" value="${col}" placeholder="#______"
+           oninput="updateSlot(${i},this.value)" maxlength="7"/>
+    <input class="slot-color-picker" id="picker${i}" type="color" value="${col||'#222222'}"
+           onchange="setSlot(${i},this.value)"/>
+    <span class="slot-label">Color ${i+1}</span>
+  </div>`;
+});
+
+function updateSlot(i, hex) {
+  if (/^#[0-9a-fA-F]{6}$/.test(hex)) {
+    document.getElementById('preview'+i).style.background = hex;
+    document.getElementById('picker'+i).value = hex;
+  }
+}
+function setSlot(i, hex) {
+  document.getElementById('preview'+i).style.background = hex;
+  document.getElementById('hex'+i).value = hex;
+}
+window.updateSlot = updateSlot;
+window.setSlot = setSlot;
+
+// ── COLOUR MATH ───────────────────────────────────────
+function hexToHsl(hex) {
+  let r = parseInt(hex.slice(1,3),16)/255;
+  let g = parseInt(hex.slice(3,5),16)/255;
+  let b = parseInt(hex.slice(5,7),16)/255;
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  let h,s,l = (max+min)/2;
+  if (max===min) { h=s=0; } else {
+    const d = max-min;
+    s = l>0.5 ? d/(2-max-min) : d/(max+min);
+    switch(max){
+      case r: h=((g-b)/d+(g<b?6:0))/6; break;
+      case g: h=((b-r)/d+2)/6; break;
+      case b: h=((r-g)/d+4)/6; break;
+    }
+  }
+  return { h:h*360, s:s*100, l:l*100 };
+}
+
+function hslToHex(h,s,l) {
+  h/=360; s/=100; l/=100;
+  let r,g,b;
+  if(s===0){r=g=b=l;}else{
+    const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};
+    const q=l<0.5?l*(1+s):l+s-l*s, p=2*l-q;
+    r=hue2rgb(p,q,h+1/3); g=hue2rgb(p,q,h); b=hue2rgb(p,q,h-1/3);
+  }
+  return '#'+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join('');
+}
+
+function analyzeColors() {
+  const colors = defaultColors.map((_,i)=>document.getElementById('hex'+i).value)
+    .filter(c => /^#[0-9a-fA-F]{6}$/.test(c));
+  if (colors.length < 2) { alert('Please enter at least 2 valid hex colours.'); return; }
+
+  // Palette bar
+  const palEl = document.getElementById('paletteDisplay');
+  palEl.innerHTML = colors.map(c=>`<div class="palette-segment" style="background:${c}"></div>`).join('');
+
+  // HSL values
+  const hsls = colors.map(hexToHsl);
+
+  // Compute harmonies
+  const hues = hsls.map(h=>h.h);
+  const avgHue = hues.reduce((a,b)=>a+b,0)/hues.length;
+  const hueSpread = Math.max(...hues) - Math.min(...hues);
+  const satAvg = hsls.map(h=>h.s).reduce((a,b)=>a+b,0)/hsls.length;
+  const lightAvg = hsls.map(h=>h.l).reduce((a,b)=>a+b,0)/hsls.length;
+
+  // Neutrality check
+  const neutralCount = hsls.filter(h=>h.s<15).length;
+  const isMonochrome = hueSpread < 30;
+  const isAnalogous  = hueSpread >= 30 && hueSpread <= 60;
+  const isComp       = hueSpread >= 150 && hueSpread <= 210;
+  const isTriadic    = hueSpread >= 100 && hueSpread <= 140;
+
+  let harmonies = [
+    {
+      name: 'Monochromatic Tension',
+      score: isMonochrome ? 90 : Math.max(20, 90 - hueSpread),
+      desc: 'All colours share a similar hue family—differentiated only by lightness and saturation. This creates visual cohesion with subtle depth. A Margiela or early Jil Sander approach.',
+      verdict: isMonochrome ? 'good' : 'ok'
+    },
+    {
+      name: 'Analogous Flow',
+      score: isAnalogous ? 85 : Math.max(15, 85 - Math.abs(hueSpread-45)*1.5),
+      desc: 'Adjacent hues on the colour wheel create a natural, harmonious progression. Found frequently in tonal dressing—Loro Piana, Max Mara, early Calvin Klein.',
+      verdict: isAnalogous ? 'good' : 'ok'
+    },
+    {
+      name: 'Complementary Drama',
+      score: isComp ? 88 : Math.max(10, 88 - Math.abs(hueSpread-180)*0.8),
+      desc: 'Opposite hues create maximum contrast and visual energy. High-impact but requires careful balance of proportion—too equal splits the eye; 80/20 ratios work best.',
+      verdict: isComp ? 'good' : 'poor'
+    }
+  ];
+  harmonies.sort((a,b)=>b.score-a.score);
+
+  document.getElementById('harmonyResults').innerHTML = harmonies.map(h=>`
+    <div class="harmony-card">
+      <div class="harmony-name">${h.name}</div>
+      <div class="harmony-score">
+        <span class="score-num">${Math.round(h.score)}</span>
+        <div class="score-bar"><div class="score-fill" style="width:${h.score}%"></div></div>
+      </div>
+      <p class="harmony-desc">${h.desc}</p>
+      <p class="harmony-verdict verdict-${h.verdict}">${h.verdict==='good'?'✓ Strong harmony':h.verdict==='ok'?'◎ Moderate harmony':'△ Use with care'}</p>
+    </div>`).join('');
+
+  // Suggestions
+  const compHue = (avgHue + 180) % 360;
+  const triHue1 = (avgHue + 120) % 360;
+  const triHue2 = (avgHue + 240) % 360;
+  const suggestions = [
+    { title:'Complementary Accent', colors:[hslToHex(compHue,satAvg*0.8,lightAvg),hslToHex(compHue,satAvg*0.5,lightAvg*0.7)], text:'Adding a complementary tone creates energy. Use sparingly—in accessories or one statement piece.' },
+    { title:'Analogous Extension', colors:[hslToHex((avgHue+30)%360,satAvg,lightAvg),hslToHex((avgHue-30+360)%360,satAvg,lightAvg)], text:'Extending the palette into neighbouring hues maintains cohesion while adding range.' },
+    { title:'Neutral Anchor', colors:['#1a1a1a','#e8e0d0','#888888'], text:'Every palette benefits from a neutral anchor. Black, ecru, or concrete grey grounds the composition.' },
+    { title:'Triadic Option', colors:[hslToHex(triHue1,satAvg*0.7,lightAvg),hslToHex(triHue2,satAvg*0.7,lightAvg)], text:'A triadic colour offers contrast without direct opposition. Difficult to wear, but creates the most memorable looks.' },
+  ];
+  document.getElementById('suggestions').innerHTML = suggestions.map(s=>`
+    <div class="suggestion-card">
+      <div class="suggestion-title">${s.title}</div>
+      <div class="suggestion-swatches">${s.colors.map(c=>`<div class="sug-swatch" style="background:${c}"></div>`).join('')}</div>
+      <p class="suggestion-text">${s.text}</p>
+    </div>`).join('');
+
+  // Notes
+  const noteText = neutralCount >= colors.length * 0.5
+    ? `Your palette is predominantly neutral—a ${lightAvg < 40 ? 'dark, anchored' : lightAvg > 70 ? 'light, airy' : 'mid-tone, balanced'} composition. This is a strong foundation for layered, textural dressing. Think Issey Miyake's Pleats Please or early COS—where the interest lives in structure and material, not colour.`
+    : `Your palette carries significant colour weight. The ${hueSpread < 60 ? 'tight hue range suggests an elegant, controlled approach' : 'broad hue spread creates tension that demands careful proportion'}. Study how Dries Van Noten handles a similar palette range—he rarely lets two strong hues compete at equal visual weight.`;
+  document.getElementById('outfitNotes').innerHTML = `<p>"${noteText}"</p>`;
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+}
+window.analyzeColors = analyzeColors;
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Realtime Capsule Planner — Project 05</title>
+<link rel="stylesheet" href="../../css/style.css"/>
+<style>
+body { background: var(--grey-10); }
+.project-hero {
+  background: var(--black);
+  padding: 9rem 2.5rem 4rem;
+  border-bottom: 1px solid var(--grey-20);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+.ph-badge { font-size: 0.58rem; letter-spacing: 0.3em; color: var(--grey-40); text-transform: uppercase; margin-bottom: 1.5rem; }
+.ph-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.9; margin-bottom: 1.5rem; }
+.ph-desc { font-size: 0.78rem; line-height: 2; color: var(--grey-60); }
+.ph-honest { margin-top: 1.5rem; padding: 1rem 1.5rem; background: var(--grey-10); border-left: 2px solid var(--grey-30); font-size: 0.68rem; line-height: 1.75; color: var(--grey-50); font-style: italic; }
+.ph-meta { display: flex; flex-direction: column; gap: 2rem; justify-content: flex-end; }
+.ph-meta-label { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--grey-40); margin-bottom: 0.3rem; }
+.ph-meta-value { font-size: 0.78rem; color: var(--grey-70); line-height: 1.8; }
+
+.app-wrap {
+  padding: 4rem 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 2rem;
+}
+.control-panel,
+.result-panel {
+  background: var(--black);
+  border: 1px solid var(--grey-20);
+}
+.control-panel { padding: 2rem; }
+.result-panel { padding: 2rem; }
+.panel-title {
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--grey-40);
+  margin-bottom: 1.4rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--grey-20);
+}
+.form-row { margin-bottom: 1.2rem; }
+.form-label {
+  display: block;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-40);
+  margin-bottom: 0.45rem;
+}
+.form-input,
+.form-select {
+  width: 100%;
+  background: var(--grey-10);
+  border: 1px solid var(--grey-20);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  outline: none;
+  cursor: none;
+}
+.range-meta {
+  margin-top: 0.45rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  color: var(--grey-50);
+  text-transform: uppercase;
+}
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+.toggle-row input { accent-color: #d9d9d9; }
+.toggle-row span {
+  font-size: 0.58rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--grey-60);
+}
+
+.result-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+.result-reason {
+  font-size: 0.72rem;
+  line-height: 1.85;
+  color: var(--grey-60);
+  margin-bottom: 1.2rem;
+}
+.reco-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+.reco-item {
+  border: 1px solid var(--grey-20);
+  padding: 0.65rem 0.75rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-50);
+}
+.palette {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  margin-bottom: 1.2rem;
+}
+.palette-swatch {
+  height: 28px;
+  border: 1px solid var(--grey-20);
+}
+.confidence-wrap {
+  margin-bottom: 1.2rem;
+}
+.confidence-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey-50);
+  margin-bottom: 0.4rem;
+}
+.confidence-bar {
+  height: 2px;
+  background: var(--grey-20);
+  position: relative;
+}
+.confidence-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--white);
+  transition: width 0.35s ease;
+}
+.alternatives-title {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-40);
+  margin-bottom: 0.55rem;
+}
+.alt-list {
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+.alt-list li {
+  font-size: 0.64rem;
+  line-height: 1.65;
+  color: var(--grey-60);
+  border-bottom: 1px solid var(--grey-20);
+  padding-bottom: 0.45rem;
+}
+
+@media (max-width: 900px) {
+  .project-hero { grid-template-columns: 1fr; }
+  .app-wrap { grid-template-columns: 1fr; }
+  .reco-items { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../pages/about.html">About</a></li>
+    <li><a href="../../pages/work.html">Work</a></li>
+    <li><a href="../../pages/contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <div>
+    <p class="ph-badge reveal">Project 005 — TypeScript App — 2026</p>
+    <h1 class="ph-title reveal d1">Realtime<br/>Capsule Outfit<br/>Planner</h1>
+    <p class="ph-desc reveal d2">A simple real-time planner that suggests outfits based on weather, occasion, and mood. Built to convert this portfolio to a TypeScript-first workflow while preserving the same UI language.</p>
+    <div class="ph-honest reveal d3">
+      <strong>Honest note:</strong> This project is intentionally small. The goal was to move from loose JavaScript to typed, maintainable code and apply it to a practical fashion decision tool.
+    </div>
+  </div>
+  <div class="ph-meta reveal d2">
+    <div>
+      <div class="ph-meta-label">Year</div>
+      <div class="ph-meta-value">2026</div>
+    </div>
+    <div>
+      <div class="ph-meta-label">Stack</div>
+      <div class="ph-meta-value">TypeScript · HTML · CSS · Typed state models</div>
+    </div>
+    <div>
+      <div class="ph-meta-label">What I learned</div>
+      <div class="ph-meta-value">Type safety, scoring logic, real-time UI updates, maintainable frontend structure</div>
+    </div>
+    <a href="../../pages/work.html" class="btn dark">← Back to Work</a>
+  </div>
+</div>
+
+<div class="app-wrap" id="realtimePlanner">
+  <aside class="control-panel reveal">
+    <div class="panel-title">Live Inputs</div>
+
+    <div class="form-row">
+      <label class="form-label" for="tempInput">Temperature (°C)</label>
+      <input class="form-input" id="tempInput" type="range" min="10" max="40" step="1" value="27"/>
+      <div class="range-meta"><span id="tempValue">27°C</span> — current setting</div>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label" for="occasionSelect">Occasion</label>
+      <select class="form-select" id="occasionSelect">
+        <option value="campus">Campus / Day</option>
+        <option value="studio">Studio Work</option>
+        <option value="evening">Evening Meet</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="form-label" for="moodSelect">Color Mood</label>
+      <select class="form-select" id="moodSelect">
+        <option value="minimal">Minimal Monochrome</option>
+        <option value="neutral">Soft Neutrals</option>
+        <option value="contrast">High Contrast</option>
+      </select>
+    </div>
+
+    <div class="toggle-row">
+      <input id="rainToggle" type="checkbox"/>
+      <span>Need rain-safe option</span>
+    </div>
+  </aside>
+
+  <section class="result-panel reveal d1">
+    <div class="panel-title">Recommendation</div>
+    <h2 class="result-title" id="resultTitle">Loading...</h2>
+    <p class="result-reason" id="resultReason">Preparing recommendation model.</p>
+
+    <div class="reco-items" id="resultItems"></div>
+
+    <div class="palette" id="paletteStrip"></div>
+
+    <div class="confidence-wrap">
+      <div class="confidence-label" id="confidenceLabel">Match confidence — 0%</div>
+      <div class="confidence-bar">
+        <div class="confidence-fill" id="confidenceFill"></div>
+      </div>
+    </div>
+
+    <div class="alternatives-title">Alternative Options</div>
+    <ul class="alt-list" id="altList"></ul>
+  </section>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Project 005 — Realtime Planner</span>
+  <div class="footer-links">
+    <a href="../../pages/work.html">All Projects</a>
+    <a href="../../pages/contact.html">Contact →</a>
+  </div>
+  <span class="footer-copy">© 2026</span>
+</footer>
+
+<script src="../../js/main.js"></script>
+<script src="../../js/projects/realtimeplanner.js"></script>
+</body>
+</html>

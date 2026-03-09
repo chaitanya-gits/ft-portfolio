@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Size Guide — Project 03</title>
+<link rel="stylesheet" href="../../css/style.css"/>
+<style>
+body { background: var(--grey-10); }
+.project-hero { background:var(--black); padding:9rem 2.5rem 4rem; border-bottom:1px solid var(--grey-20); display:grid; grid-template-columns:1fr 1fr; gap:4rem; }
+.ph-badge { font-size:0.58rem; letter-spacing:0.3em; color:var(--grey-40); text-transform:uppercase; margin-bottom:1.5rem; }
+.ph-title { font-family:var(--font-display); font-size:clamp(2.5rem,6vw,5rem); line-height:0.9; margin-bottom:1.5rem; }
+.ph-desc { font-size:0.78rem; line-height:2; color:var(--grey-60); }
+.ph-honest { margin-top:1.5rem; padding:1rem 1.5rem; background:var(--grey-10); border-left:2px solid var(--grey-30); font-size:0.68rem; line-height:1.75; color:var(--grey-50); font-style:italic; }
+.ph-meta { display:flex; flex-direction:column; gap:2rem; justify-content:flex-end; }
+.ph-meta-label { font-size:0.52rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--grey-40); margin-bottom:0.3rem; }
+.ph-meta-value { font-size:0.78rem; color:var(--grey-70); line-height:1.8; }
+
+.app-section { padding:4rem 2.5rem; max-width:900px; margin:0 auto; }
+
+/* CONVERTER */
+.converter-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:3rem; }
+.conv-card { background:var(--black); border:1px solid var(--grey-20); padding:2rem; }
+.conv-card h3 { font-family:var(--font-display); font-size:0.9rem; letter-spacing:0.25em; margin-bottom:1.5rem; color:var(--grey-60); }
+.conv-select { width:100%; background:var(--grey-10); border:1px solid var(--grey-20); color:var(--white); font-family:var(--font-body); font-size:0.75rem; padding:0.8rem 1rem; outline:none; cursor:none; margin-bottom:0.5rem; }
+.conv-select option { background:var(--grey-10); }
+.conv-label { font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--grey-40); margin-bottom:0.4rem; display:block; }
+.conv-input { width:100%; background:var(--grey-10); border:1px solid var(--grey-20); color:var(--white); font-family:var(--font-body); font-size:0.75rem; padding:0.8rem 1rem; outline:none; cursor:none; }
+.convert-btn { width:100%; background:var(--white); color:var(--black); border:none; font-family:var(--font-body); font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; padding:0.9rem; cursor:none; margin-top:1.5rem; transition:background 0.2s; }
+.convert-btn:hover { background:var(--grey-90); }
+
+.result-box { background:var(--grey-10); border:1px solid var(--grey-20); padding:2rem; display:none; }
+.result-box.show { display:block; }
+.result-big { font-family:var(--font-display); font-size:4rem; line-height:1; color:var(--white); margin-bottom:0.5rem; }
+.result-context { font-size:0.68rem; line-height:1.8; color:var(--grey-60); }
+
+/* FULL TABLE */
+.table-section { margin-top:4rem; }
+.size-table { width:100%; border-collapse:collapse; }
+.size-table th { font-size:0.55rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--grey-40); padding:0.75rem 1rem; text-align:left; border-bottom:1px solid var(--grey-20); }
+.size-table td { font-size:0.72rem; padding:0.75rem 1rem; border-bottom:1px solid var(--grey-20); color:var(--grey-70); }
+.size-table tr:hover td { background:var(--grey-10); color:var(--white); }
+.size-table td:first-child { font-weight:500; color:var(--white); }
+.table-tabs { display:flex; gap:0; margin-bottom:2rem; border-bottom:1px solid var(--grey-20); }
+.tab-btn { font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; padding:0.75rem 1.5rem; background:transparent; border:none; color:var(--grey-40); cursor:none; transition:color 0.2s; border-bottom:2px solid transparent; }
+.tab-btn.active { color:var(--white); border-bottom-color:var(--white); }
+.tab-content { display:none; } .tab-content.active { display:block; }
+
+.note-box { background:var(--black); border:1px solid var(--grey-20); padding:1.5rem; margin-top:2rem; font-size:0.68rem; line-height:1.85; color:var(--grey-60); }
+.note-box strong { color:var(--white); font-weight:500; }
+@media (max-width:900px) { .project-hero{grid-template-columns:1fr;} .converter-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">FT / PORTFOLIO</a>
+  <button class="nav-hamburger"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../../pages/about.html">About</a></li>
+    <li><a href="../../pages/work.html">Work</a></li>
+    <li><a href="../../pages/contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-hero">
+  <div>
+    <p class="ph-badge reveal">Project 003 — Utility Tool — 2024</p>
+    <h1 class="ph-title reveal d1">India →<br/>Italy<br/>Size Guide</h1>
+    <p class="ph-desc reveal d2">Size conversion tool for clothing and shoes between Indian and Italian standards. Covers women's tops, bottoms, shoes, and men's shirts and trousers.</p>
+    <div class="ph-honest reveal d3">
+      <strong>Honest note:</strong> I built this to solve a real frustration. When I started researching Italian brands and trying to understand sizing in context, there was no clean, reliable tool. I gathered the data from manufacturer sizing charts and built this. It is simple, but I use it.
+    </div>
+  </div>
+  <div class="ph-meta reveal d2">
+    <div><div class="ph-meta-label">Year</div><div class="ph-meta-value">2024</div></div>
+    <div><div class="ph-meta-label">Stack</div><div class="ph-meta-value">HTML · CSS · Vanilla JavaScript</div></div>
+    <div><div class="ph-meta-label">What I learned</div><div class="ph-meta-value">How sizing works across regions, Italian fashion industry standards, practical research skills</div></div>
+    <a href="../../pages/work.html" class="btn dark">← Back to Work</a>
+  </div>
+</div>
+
+<div class="app-section">
+  <div class="section-tag reveal">Quick Converter</div>
+  <div class="converter-grid">
+    <div class="conv-card reveal">
+      <h3>Category</h3>
+      <label class="conv-label">Select Category</label>
+      <select class="conv-select" id="catSelect" onchange="updateInputOptions()">
+        <option value="womens_top">Women's — Tops</option>
+        <option value="womens_bottom">Women's — Bottoms</option>
+        <option value="womens_shoes">Women's — Shoes</option>
+        <option value="mens_shirt">Men's — Shirts</option>
+        <option value="mens_trouser">Men's — Trousers (Waist)</option>
+        <option value="mens_shoes">Men's — Shoes</option>
+      </select>
+      <label class="conv-label" style="margin-top:1rem;">Indian Size</label>
+      <select class="conv-select" id="sizeSelect"></select>
+      <button class="convert-btn" onclick="convert()">Convert →</button>
+    </div>
+    <div class="conv-card reveal d1">
+      <h3>Result</h3>
+      <div class="result-box" id="resultBox">
+        <div class="result-big" id="resultBig">—</div>
+        <p class="result-context" id="resultContext"></p>
+      </div>
+      <p style="font-family:var(--font-serif);font-style:italic;font-size:0.85rem;color:var(--grey-50);line-height:1.7;" id="initMsg">
+        Select a category and size, then click Convert.
+      </p>
+    </div>
+  </div>
+
+  <div class="table-section">
+    <div class="section-tag reveal">Full Reference Tables</div>
+    <div class="table-tabs reveal d1">
+      <button class="tab-btn active" onclick="switchTab('womens')">Women's</button>
+      <button class="tab-btn" onclick="switchTab('mens')">Men's</button>
+      <button class="tab-btn" onclick="switchTab('shoes')">Shoes</button>
+    </div>
+
+    <div class="tab-content active" id="tab-womens">
+      <div class="result-label" style="font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--grey-40);margin-bottom:1rem;">Women's Tops & Dresses</div>
+      <table class="size-table">
+        <thead><tr><th>India</th><th>Italy</th><th>EU</th><th>UK</th><th>Chest (cm)</th><th>Waist (cm)</th></tr></thead>
+        <tbody>
+          <tr><td>XS / 32</td><td>36</td><td>32</td><td>6</td><td>76–78</td><td>60–62</td></tr>
+          <tr><td>S / 34</td><td>38</td><td>34</td><td>8</td><td>80–82</td><td>64–66</td></tr>
+          <tr><td>M / 36</td><td>40</td><td>36</td><td>10</td><td>84–86</td><td>68–70</td></tr>
+          <tr><td>M / 38</td><td>42</td><td>38</td><td>12</td><td>88–90</td><td>72–74</td></tr>
+          <tr><td>L / 40</td><td>44</td><td>40</td><td>14</td><td>92–94</td><td>76–78</td></tr>
+          <tr><td>XL / 42</td><td>46</td><td>42</td><td>16</td><td>96–98</td><td>80–82</td></tr>
+          <tr><td>XXL / 44</td><td>48</td><td>44</td><td>18</td><td>100–102</td><td>84–86</td></tr>
+        </tbody>
+      </table>
+      <div class="result-label" style="font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--grey-40);margin:2rem 0 1rem;">Women's Bottoms</div>
+      <table class="size-table">
+        <thead><tr><th>India</th><th>Italy</th><th>EU</th><th>UK</th><th>Waist (cm)</th><th>Hip (cm)</th></tr></thead>
+        <tbody>
+          <tr><td>26</td><td>36</td><td>34</td><td>6</td><td>66</td><td>92</td></tr>
+          <tr><td>28</td><td>38</td><td>36</td><td>8</td><td>70</td><td>96</td></tr>
+          <tr><td>30</td><td>40</td><td>38</td><td>10</td><td>74</td><td>100</td></tr>
+          <tr><td>32</td><td>42</td><td>40</td><td>12</td><td>78</td><td>104</td></tr>
+          <tr><td>34</td><td>44</td><td>42</td><td>14</td><td>82</td><td>108</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-content" id="tab-mens">
+      <div class="result-label" style="font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--grey-40);margin-bottom:1rem;">Men's Shirts (Chest)</div>
+      <table class="size-table">
+        <thead><tr><th>India</th><th>Italy</th><th>EU</th><th>UK</th><th>Chest (cm)</th></tr></thead>
+        <tbody>
+          <tr><td>S / 38</td><td>44</td><td>44</td><td>34</td><td>88–91</td></tr>
+          <tr><td>M / 40</td><td>46</td><td>46</td><td>36</td><td>92–95</td></tr>
+          <tr><td>M / 42</td><td>48</td><td>48</td><td>38</td><td>96–99</td></tr>
+          <tr><td>L / 44</td><td>50</td><td>50</td><td>40</td><td>100–103</td></tr>
+          <tr><td>XL / 46</td><td>52</td><td>52</td><td>42</td><td>104–107</td></tr>
+          <tr><td>XXL / 48</td><td>54</td><td>54</td><td>44</td><td>108–111</td></tr>
+        </tbody>
+      </table>
+      <div class="result-label" style="font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--grey-40);margin:2rem 0 1rem;">Men's Trousers (Waist)</div>
+      <table class="size-table">
+        <thead><tr><th>India Waist (in)</th><th>Italy</th><th>EU Waist (cm)</th><th>UK</th></tr></thead>
+        <tbody>
+          <tr><td>28</td><td>44</td><td>71</td><td>28</td></tr>
+          <tr><td>30</td><td>46</td><td>76</td><td>30</td></tr>
+          <tr><td>32</td><td>48</td><td>81</td><td>32</td></tr>
+          <tr><td>34</td><td>50</td><td>86</td><td>34</td></tr>
+          <tr><td>36</td><td>52</td><td>91</td><td>36</td></tr>
+          <tr><td>38</td><td>54</td><td>97</td><td>38</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-content" id="tab-shoes">
+      <div class="result-label" style="font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--grey-40);margin-bottom:1rem;">Women's Shoes</div>
+      <table class="size-table">
+        <thead><tr><th>India</th><th>Italy / EU</th><th>UK</th><th>US</th><th>Foot Length (cm)</th></tr></thead>
+        <tbody>
+          <tr><td>4</td><td>37</td><td>4</td><td>6</td><td>23.5</td></tr>
+          <tr><td>5</td><td>38</td><td>5</td><td>7</td><td>24.0</td></tr>
+          <tr><td>6</td><td>39</td><td>6</td><td>8</td><td>25.0</td></tr>
+          <tr><td>7</td><td>40</td><td>6.5</td><td>8.5</td><td>25.5</td></tr>
+          <tr><td>8</td><td>41</td><td>7.5</td><td>9.5</td><td>26.0</td></tr>
+        </tbody>
+      </table>
+      <div class="result-label" style="font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--grey-40);margin:2rem 0 1rem;">Men's Shoes</div>
+      <table class="size-table">
+        <thead><tr><th>India</th><th>Italy / EU</th><th>UK</th><th>US</th><th>Foot Length (cm)</th></tr></thead>
+        <tbody>
+          <tr><td>6</td><td>39</td><td>5.5</td><td>6.5</td><td>24.8</td></tr>
+          <tr><td>7</td><td>40</td><td>6.5</td><td>7.5</td><td>25.4</td></tr>
+          <tr><td>8</td><td>41</td><td>7</td><td>8</td><td>26.0</td></tr>
+          <tr><td>9</td><td>42</td><td>8</td><td>9</td><td>26.7</td></tr>
+          <tr><td>10</td><td>43</td><td>9</td><td>10</td><td>27.3</td></tr>
+          <tr><td>11</td><td>44</td><td>9.5</td><td>10.5</td><td>28.0</td></tr>
+          <tr><td>12</td><td>45</td><td>10.5</td><td>11.5</td><td>28.6</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note-box reveal">
+      <strong>Important:</strong> Sizing varies by brand and cut. Italian luxury brands (Prada, Gucci, Bottega Veneta) and fast fashion (Zara Italy) may have different sizing practices within the same system. Always check individual brand size charts when possible. The measurements shown are averages based on standard industry sizing charts.<br/><br/>
+      <strong>Italian sizing note:</strong> Italian women's sizing tends to run 4–6 numbers ahead of Indian/UK sizing (e.g., an Indian size 36 is approximately an Italian 40). Italian men's sizing aligns closely with EU standards.
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Project 003 — Size Guide</span>
+  <div class="footer-links">
+    <a href="../../pages/work.html">All Projects</a>
+    <a href="../lookbook/index.html">Next Project →</a>
+  </div>
+  <span class="footer-copy">© 2025</span>
+</footer>
+
+<script src="../../js/main.js"></script>
+<script>
+const sizeData = {
+  womens_top: {
+    sizes: ['XS/32','S/34','M/36','M/38','L/40','XL/42','XXL/44'],
+    italian: ['36','38','40','42','44','46','48'],
+    chest:   ['76–78cm','80–82cm','84–86cm','88–90cm','92–94cm','96–98cm','100–102cm'],
+  },
+  womens_bottom: {
+    sizes: ['26','28','30','32','34'],
+    italian: ['36','38','40','42','44'],
+    waist:   ['66cm','70cm','74cm','78cm','82cm'],
+  },
+  womens_shoes: {
+    sizes: ['4','5','6','7','8'],
+    italian: ['37','38','39','40','41'],
+    length:  ['23.5cm','24.0cm','25.0cm','25.5cm','26.0cm'],
+  },
+  mens_shirt: {
+    sizes: ['S/38','M/40','M/42','L/44','XL/46','XXL/48'],
+    italian: ['44','46','48','50','52','54'],
+    chest:   ['88–91cm','92–95cm','96–99cm','100–103cm','104–107cm','108–111cm'],
+  },
+  mens_trouser: {
+    sizes: ['28"','30"','32"','34"','36"','38"'],
+    italian: ['44','46','48','50','52','54'],
+    waist:   ['71cm','76cm','81cm','86cm','91cm','97cm'],
+  },
+  mens_shoes: {
+    sizes: ['6','7','8','9','10','11','12'],
+    italian: ['39','40','41','42','43','44','45'],
+    length:  ['24.8cm','25.4cm','26.0cm','26.7cm','27.3cm','28.0cm','28.6cm'],
+  },
+};
+
+function updateInputOptions() {
+  const cat = document.getElementById('catSelect').value;
+  const sel = document.getElementById('sizeSelect');
+  sel.innerHTML = sizeData[cat].sizes.map((s,i)=>`<option value="${i}">${s}</option>`).join('');
+}
+updateInputOptions();
+
+function convert() {
+  const cat = document.getElementById('catSelect').value;
+  const idx = parseInt(document.getElementById('sizeSelect').value);
+  const data = sizeData[cat];
+  const it = data.italian[idx];
+  const extra = data.chest?.[idx] || data.waist?.[idx] || data.length?.[idx] || '';
+  document.getElementById('resultBig').textContent = 'IT ' + it;
+  document.getElementById('resultContext').textContent = `Italian size ${it}${extra ? ' · ' + extra : ''}\nIndian size: ${data.sizes[idx]}`;
+  document.getElementById('resultBox').classList.add('show');
+  document.getElementById('initMsg').style.display='none';
+}
+window.convert = convert;
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+window.switchTab = switchTab;
+</script>
+</body>
+</html>
